@@ -23,5 +23,10 @@ jobs:
                   tflint_version: v0.44.0
             - name: Install TfLInt and NodeJS
               run: |
-                  npm i markdown-link-check
+                  npm install -g markdown-link-check
             - uses: pre-commit/action@v3.0.0
+              with:
+                  extra_args: yamllint --all-files
+            - uses: pre-commit/action@v3.0.0
+              with:
+                  extra_args: yamlfmt --all-files
