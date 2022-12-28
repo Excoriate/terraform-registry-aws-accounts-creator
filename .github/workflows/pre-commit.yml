@@ -28,3 +28,5 @@ jobs:
               run: |
                   npm install -g markdown-link-check
             - uses: pre-commit/action@v3.0.0
+              with:
+                  pre-commit.config: ${{ env.PRE_COMMIT_CONFIG }}
