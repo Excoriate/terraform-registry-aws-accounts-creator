@@ -44,7 +44,7 @@ fi
 gum style --foreground 212 "tfenv is properly installed ⚡️"
 
 #5. Installing Terraform version from TFEnv
-if ! tfenv list | grep -q '*'; then
+if ! tfenv list | grep -qE '\*'; then
   gum style --foreground 196 "No Terraform version is selected. Please select a Terraform version first."
   gum style --foreground 196 "Installing Terraform version latest"
   tfenv install latest
@@ -76,8 +76,8 @@ fi
 if ! grep -q 'export PATH=' "$HOME/.zshrc" || ! grep -q 'export GOROOT=' "$HOME/.zshrc"; then
   gum style --foreground 196 "gobrew is not configured. Please configure gobrew first."
     # Add the lines at the end of the ~/.zshrc file
-  echo 'export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"' >> "$HOME/.zshrc"
-  echo 'export GOROOT="$HOME/.gobrew/current/go"' >> "$HOME/.zshrc"
+  echo "export PATH=\"\$HOME/.gobrew/current/bin:\$HOME/.gobrew/bin:\$PATH\"" >> "$HOME/.zshrc"
+  echo "export GOROOT=\"\$HOME/.gobrew/current/go\"" >> "$HOME/.zshrc"
 else
   gum style --foreground 212 "gobrew is properly configured ⚡️"
 fi
@@ -121,7 +121,9 @@ fi
 if ! grep -q 'export NVM_DIR=' "$HOME/.zshrc" || ! grep -q '/opt/homebrew/opt/nvm/nvm.sh' "$HOME/.zshrc" || ! grep -q '/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm' "$HOME/.zshrc"; then
   gum style --foreground 196 "nvm is not properly configured. Please configure nvm first."
   # Add the lines at the end of the ~/.zshrc file
-  echo 'export NVM_DIR="$HOME/.nvm"' >> "$HOME/.zshrc"
+  {
+    echo "export NVM_DIR=\"\$HOME/.nvm\""
+  } >> "$HOME/.zshrc"
   echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm' >> "$HOME/.zshrc"
   echo '[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion' >> "$HOME/.zshrc"
 else
