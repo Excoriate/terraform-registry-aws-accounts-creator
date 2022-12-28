@@ -155,4 +155,4 @@ tasks:
                 exit 1
               fi
               cat .terraform-docs.yml
-              terraform-docs .
+              terraform-docs -c .terraform-docs.yml md . > README.md
