@@ -9,9 +9,15 @@ on:
         types: [opened, edited, synchronize]
 
 jobs:
-    pre-commit:
+    run-all-hooks:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-python@v3
+            - name: Install markdown-link-check
+              run: |
+                  pip install markdown-link-check
+            - name: Install tflint
+              run: |
+                  pip install tflint
             - uses: pre-commit/action@v3.0.0
