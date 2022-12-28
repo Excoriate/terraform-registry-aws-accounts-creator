@@ -7,7 +7,7 @@
 ---
 
 [![Auto Release](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml/badge.svg)](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml)
-[![CI: Infrastructure Test](https://github.com/Excoriate/terraform-taggy/actions/workflows/ci.yml/badge.svg)](https://github.com/Excoriate/terraform-taggy/actions/workflows/ci.yml)
+[![Run pre-commit](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/pre-commit.yml)
 
 [//]: # (FIXME: Change the badges accordingly (template)
 

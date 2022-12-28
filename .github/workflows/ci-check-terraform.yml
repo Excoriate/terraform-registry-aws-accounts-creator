@@ -1,0 +1,38 @@
+---
+name: Terraform Check
+
+on:
+    push:
+    pull_request:
+        types: [opened, edited, synchronize]
+
+jobs:
+    CI-module:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: module
+        steps:
+            - uses: actions/checkout@v2
+            - uses: hashicorp/setup-terraform@v1
+              with:
+                  terraform_version: latest
+            - run: terraform init
+            - run: terraform validate
+            - run: terraform fmt -check=true
+
+    CI-examples-basic:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: examples/basic
+        needs: CI-module
+        steps:
+            - uses: actions/checkout@v2
+            - uses: hashicorp/setup-terraform@v1
+              with:
+                  terraform_version: latest
+            - run: terraform init
+            - run: terraform validate
+            - run: terraform fmt -check=true
+            - run: terraform plan -var-file=config/fixtures.tfvars
