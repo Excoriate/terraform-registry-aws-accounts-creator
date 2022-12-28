@@ -2,12 +2,16 @@
 name: auto-release
 
 on:
-    push:
+    workflow_run:
+        workflows: [Generate New Version]
+        types:
+            - completed
         branches:
             - main
             - master
             - production
         paths-ignore:
+            - package.json
             - TaskFile.yml
             - CHANGELOG.md
 
