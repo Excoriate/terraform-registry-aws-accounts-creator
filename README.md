@@ -6,12 +6,12 @@
 
 ---
 
-[//]: # (FIXME: Change the badges accordingly (template)
 [![Auto Release](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml/badge.svg)](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml)
 [![CI: Infrastructure Test](https://github.com/Excoriate/terraform-taggy/actions/workflows/ci.yml/badge.svg)](https://github.com/Excoriate/terraform-taggy/actions/workflows/ci.yml)
 
+[//]: # (FIXME: Change the badges accordingly (template)
+
 ## Table of Contents
- generate a table of content
 1. [About The Module](#about-the-module)
 2. [Module documentation](#module-documentation)
    1. [Capabilities](#capabilities)
