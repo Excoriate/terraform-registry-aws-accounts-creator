@@ -22,7 +22,9 @@ tasks:
 
     hooks-install:
         cmds:
+            - ./DevEx/scripts/hooks/install-pre-commit-hooks-deps.sh
             - pre-commit install
+            - pre-commit autoupdate
 
     hooks:
         cmds:
