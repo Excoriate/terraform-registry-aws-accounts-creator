@@ -63,7 +63,7 @@ explaining why the change is absolutely necessary.
 
 ## Create a pull request
 
-[Create a pull request] with your changes. For it, this repository includes a [pull request template](.github/PULL_REQUEST_TEMPLATE/PULL_REQUEST_TEMPLATE.md) that you can use to help you write a good description of your changes.
+[Create a pull request] with your changes. For it, this repository includes a [pull request template](.github/PULL_REQUEST_TEMPLATE.md) that you can use to help you write a good description of your changes.
 
 ## Merge and release
 
