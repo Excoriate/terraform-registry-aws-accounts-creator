@@ -2,7 +2,6 @@
 name: Terraform Check
 
 on:
-    push:
     pull_request:
         types: [opened, edited, synchronize]
 
@@ -52,7 +51,9 @@ jobs:
               with:
                   terraform_version: latest
 
-            - run: terraform init
+            - name: Terraform Init
+              id: init
+              run: terraform init
 
             - name: Terraform Plan
               id: plan
@@ -61,6 +62,14 @@ jobs:
                   terraform plan \
                   -no-color -input=false -var-file=config/fixtures.tfvars
               continue-on-error: true
+
+            - name: Terraform Format
+              id: fmt
+              run: terraform fmt -check
+
+            - name: Terraform Validate
+              id: validate
+              run: terraform validate -no-color
 
             - name: Update Pull Request
               uses: actions/github-script@v6
