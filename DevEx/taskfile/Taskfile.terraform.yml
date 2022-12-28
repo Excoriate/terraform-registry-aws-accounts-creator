@@ -36,7 +36,12 @@ tasks:
               echo "Working directory: {{.TF_WORKING_DIR}}"
               echo "Full path: $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
 
               if [ -n "{{.TF_BACKEND_CONFIG}}" ] && [ -f "{{.TF_BACKEND_CONFIG}}" ]; then
                 echo "Using backend configuration file: {{.TF_BACKEND_CONFIG}}"
@@ -54,7 +59,12 @@ tasks:
               echo "Running Terraform plan in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
 
               if [ -n "{{.TF_VARS_FILE}}" ]; then
                 terraform plan -var-file={{.TF_VARS_FILE}}
@@ -70,7 +80,12 @@ tasks:
               echo "Running Terraform Apply in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
 
               if [ -n "{{.TF_VARS_FILE}}" ]; then
                 terraform apply -var-file={{.TF_VARS_FILE}} -auto-approve
@@ -86,7 +101,12 @@ tasks:
               echo "Running Terraform Destroy in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
 
               if [ -n "{{.TF_VARS_FILE}}" ]; then
                 terraform destroy -var-file={{.TF_VARS_FILE}} -auto-approve
@@ -120,6 +140,8 @@ tasks:
                 echo "Error: .tflint.hcl file not found"
                 exit 1
               fi
+
+              tflint -v
 
               tflint --init
               tflint .

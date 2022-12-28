@@ -1,7 +1,7 @@
 resource "aws_organizations_organizational_unit" "this" {
-  for_each  = local.is_org_units_enabled ? local.aws_org_units : {}
-  name      = each.value["name"]
-  parent_id = join("", [for root in aws_organizations_organization.this.*.roots : root.id if root != null])
+  for_each = local.is_org_units_enabled ? local.aws_org_units : {}
+  name     = each.value["name"]
+  parent_id = join("", aws_organizations_organizational_unit.this[each.value["org_unit"]].id)
 
   tags = var.tags
 }

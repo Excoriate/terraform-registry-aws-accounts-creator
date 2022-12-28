@@ -10,6 +10,11 @@ plugin "aws" {
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
 }
 
+plugin "terraform" {
+  enabled = true
+  preset  = "recommended"
+}
+
 rule "terraform_module_pinned_source" {
   enabled = true
 }

@@ -14,4 +14,5 @@ module "main_module" {
       }
     ]
   }
+  aws_region = var.aws_region
 }

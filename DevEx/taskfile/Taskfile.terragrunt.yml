@@ -35,7 +35,13 @@ tasks:
               echo "Working directory: {{.TF_WORKING_DIR}}"
               echo "Full path: $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
+
               terragrunt init
 
     plan:
@@ -46,7 +52,12 @@ tasks:
               echo "Running Terragrunt plan in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
 
               terragrunt plan
 
@@ -58,7 +69,13 @@ tasks:
               echo "Running Terragrunt Apply in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
+
               terragrunt apply -auto-approve
 
     destroy:
@@ -69,7 +86,13 @@ tasks:
               echo "Running Terragrunt Destroy in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
+
               terragrunt destroy
 
     lint:
@@ -80,7 +103,13 @@ tasks:
               echo "Running Terragrunt fmt check in {{.TF_WORKING_DIR}}"
               echo "Full path is $(pwd)/{{.TF_WORKING_DIR}}"
 
-              cd {{.TF_WORKING_DIR}}
+              if [ -z "{{.TF_WORKING_DIR}}" ] || [ "{{.TF_WORKING_DIR}}" = "." ]; then
+                  echo "Working directory is not set or is \".\""
+              else
+                  echo "Working directory is set: {{.TF_WORKING_DIR}}"
+                  cd {{.TF_WORKING_DIR}}
+              fi
+
               terragrunt fmt -check
               terragrunt hclfmt
               terragrunt validate-inputs --terragrunt-strict-validate

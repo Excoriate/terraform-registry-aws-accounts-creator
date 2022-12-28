@@ -50,7 +50,13 @@ tasks:
         cmds:
             - task: devex:gen-env-aws
 
+    module-init:
+      desc: Run Terraform Init on module's source code.
+      cmds:
+        - task: module:init
+
     module-ci:
-        desc: Run common terraform tasks on module's folder.
-        cmds:
-            - task: module:ci
+          desc: Run common terraform tasks on module's folder.
+          cmds:
+              - task: module:docs
+              - task: module:ci

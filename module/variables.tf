@@ -6,7 +6,7 @@ modules that conditionally includes resources provided by this module..
 EOF
 }
 
-variable "aws_region"{
+variable "aws_region" {
   type        = string
   description = "AWS region to deploy the resources"
 }

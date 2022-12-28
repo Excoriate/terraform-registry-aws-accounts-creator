@@ -1,6 +1,4 @@
 locals {
-  is_module_enabled = toset(var.is_enabled ? ["enabled"] : [])
-
   // Default service principals
   default_aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -14,6 +12,9 @@ locals {
     "sts.amazonaws.com",
     "sso.amazonaws.com",
   ]
+
+  // This one is just to be exposed as an output value, also it's required by an upstream terragrunt stack.
+  aws_region_to_deploy = var.aws_region
 
   // feature flags.
   is_org_units_enabled = !var.is_enabled ? false : length(var.aws_org_config.org_units) > 0 ? true : false
