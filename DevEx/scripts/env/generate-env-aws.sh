@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # Set AWS credentials based on pre-configured AWS profiles.
-# Copyright 2022 alextorresruiz
 
 function discover_aws_profiles_from_aws_creds {
   local aws_profiles

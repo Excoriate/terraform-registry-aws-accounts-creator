@@ -6,6 +6,7 @@
 
 ---
 
+[//]: # (FIXME: Change the badges accordingly (template)
 [![Auto Release](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml/badge.svg)](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml)
 [![CI: Infrastructure Test](https://github.com/Excoriate/terraform-taggy/actions/workflows/ci.yml/badge.svg)](https://github.com/Excoriate/terraform-taggy/actions/workflows/ci.yml)
 
@@ -20,10 +21,7 @@
 3. [Developer Experience](#developer-experience)
    1. [Tools used](#tools-used)
    2. [Configuring AWS credentials for local development](#configuring-aws-credentials-for-local-development)
-   3. [Module development](#module-development)
-   4. [Testing](#testing)
-   5. [Releasing](#releasing)
-4. [Contributions](#contributions)
+4. [Contributions](#contributing)
 5. [License](#license)
 6. [Contact](#contact)
 
@@ -31,6 +29,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Module
+[//]: # (FIXME: Complete and fill/change it accordingly (template)
 (put high level description here)
 
 ---
@@ -39,10 +38,16 @@
 ## Module documentation
 The documentation is **automatically generated** by [terraform-docs](https://terraform-docs.io), and it's available in the module's [README.md](./module/README.md) file.
 ### Capabilities
+[//]: # (FIXME: Complete and fill/change it accordingly (template)
+
 (put description here)
 ### Getting Started
+[//]: # (FIXME: Complete and fill/change it accordingly (template)
+
 (put description here)
 ### Roadmap
+[//]: # (FIXME: Complete and fill/change it accordingly (template)
+
 (put description here)
 
 ### Module standard structure

@@ -65,3 +65,19 @@ tasks:
         cmds:
             - task: module:docs
             - task: module:ci
+
+    example-basic-init:
+        desc: Run Terraform Init on module's example recipe source code.
+        cmds:
+            - task: example-basic:init
+
+    example-basic-plan:
+        desc: Run Terraform Plan on module's example recipe source code.
+        cmds:
+            - task: example-basic:plan
+
+    example-basic-ci:
+        desc: Run Set of checks, fmt and linting operations over the example's module.
+        cmds:
+            - task: example-basic:ci
+            - task: example-basic:docs

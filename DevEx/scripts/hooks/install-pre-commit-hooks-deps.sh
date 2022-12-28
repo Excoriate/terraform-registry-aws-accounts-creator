@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-set -e # exit immediately if a command exits with a non-zero status
-set -u # treat unset variables as an error and exit immediately
-set -o pipefail # cause a pipeline to fail, if any command within it fails
+set -e
+set -u
+set -o pipefail
 
 # 1. Installing GUM.
 if ! command -v gum > /dev/null; then

@@ -24,6 +24,12 @@ tasks:
             - task: tf:init
               vars: {TF_WORKING_DIR: '{{.working_dir}}'}
 
+    plan:
+        deps: [clean]
+        cmds:
+            - task: tf:plan
+              vars: {TF_WORKING_DIR: '{{.working_dir}}'}
+
     ci:
         deps: [clean]
         cmds:

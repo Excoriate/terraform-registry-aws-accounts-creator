@@ -24,11 +24,30 @@ tasks:
             - task: tf:init
               vars: {TF_WORKING_DIR: '{{.working_dir}}'}
 
+    plan:
+        deps: [clean]
+        cmds:
+            - task: tf:plan
+              vars: {TF_WORKING_DIR: '{{.working_dir}}'}
+
+    apply:
+        deps: [clean]
+        cmds:
+            - task: tf:apply
+              vars: {TF_WORKING_DIR: '{{.working_dir}}'}
+
+
+    destroy:
+        deps: [clean]
+        cmds:
+            - task: tf:destroy
+              vars: {TF_WORKING_DIR: '{{.working_dir}}'}
+
     ci:
         cmds:
             - task: tf:fmt-fix
-            - task: tf:validate
-            - task: tf:lint
+#            - task: tf:validate
+#            - task: tf:lint
             - task: tf:docs
 
     docs:
