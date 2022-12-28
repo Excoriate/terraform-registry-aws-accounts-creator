@@ -14,10 +14,8 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-python@v3
-            - name: Install markdown-link-check
+            - name: Install TfLInt and NodeJS
               run: |
-                  pip install markdown-link-check
-            - name: Install tflint
-              run: |
-                  pip install tflint
+                  curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+                  curl -L https://git.io/n-install | bash
             - uses: pre-commit/action@v3.0.0
