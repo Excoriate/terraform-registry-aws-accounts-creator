@@ -40,6 +40,11 @@ tasks:
         cmds:
             - task: common:default
 
+    pre-commit-init:
+        desc: Initialize and install required hooks
+        cmds:
+            - task: common:hooks-install
+
     pre-commit:
         desc: Run all the pre-configured pre-commit hooks.
         cmds:

@@ -20,6 +20,10 @@ tasks:
             - task: clean
             - git clean -f -xd --exclude=".idea" --exclude=".env" --exclude="*.tfvars" --exclude="backend.hcl" --exclude="backend.tf" --exclude="Taskfile.yml"
 
+    hooks-install:
+        cmds:
+            - pre-commit install
+
     hooks:
         cmds:
             - pre-commit run --show-diff-on-failure --color always --all-files {{.CLI_ARGS}} # Pass arguments using -- <arg1> <arg2> ...
