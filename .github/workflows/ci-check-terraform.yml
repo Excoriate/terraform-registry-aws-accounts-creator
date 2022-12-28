@@ -21,6 +21,21 @@ jobs:
             - run: terraform validate
             - run: terraform fmt -check=true
 
+            - name: Terraform TFLintSetup
+              id: terraform-tflint-setup
+              uses: terraform-linters/setup-tflint@v1
+              with:
+                  tflint_version: latest
+
+            - name: TFLint Run
+              id: terraform-tflint-run
+              run: |
+                  tflint --version
+                  tflint --init
+                  tflint --disable-rule=terraform_module_pinned_source
+                  tflint .
+
+
     CI-examples-basic:
         runs-on: ubuntu-latest
         defaults:
@@ -35,4 +50,17 @@ jobs:
             - run: terraform init
             - run: terraform validate
             - run: terraform fmt -check=true
-            - run: terraform plan -var-file=config/fixtures.tfvars
+
+            - name: Terraform TFLintSetup
+              id: terraform-tflint-setup
+              uses: terraform-linters/setup-tflint@v1
+              with:
+                  tflint_version: latest
+
+            - name: TFLint Run
+              id: terraform-tflint-run
+              run: |
+                  tflint --version
+                  tflint --init
+                  tflint --disable-rule=terraform_module_pinned_source
+                  tflint .
