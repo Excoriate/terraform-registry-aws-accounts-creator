@@ -1,5 +1,5 @@
 ---
-name: Terraform Check
+name: Terraform Plan on PR
 
 on:
     pull_request:
@@ -11,7 +11,7 @@ env:
     AWS_DEFAULT_REGION: us-east-1
 
 jobs:
-    ci-terraform-plan:
+    ci:
         runs-on: ubuntu-latest
         defaults:
             run:
