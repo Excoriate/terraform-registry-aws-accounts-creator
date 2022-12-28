@@ -1,13 +1,13 @@
 ---
 version: '3'
 
-###########################################################################################
+#-----------------------------------------------------------------------------------------
 # ENVIRONMENT VARIABLES CONFIGURATION
 # ----------------------------------
 # - These variables are used to configure the environment for the task.
 # - It's set while calling the task. E.g.: ENV=master task <task_name>
 # - Remember to generate the .env.<env>.aws or .env.<env>.terraform previously.
-###########################################################################################
+#-----------------------------------------------------------------------------------------
 env:
     TARGET_ENVIRONMENT: '{{.ENV}}'
 
@@ -21,19 +21,19 @@ includes:
         taskfile: ./DevEx/taskfile/Taskfile.devex.yml
 
 
-  ###########################################################################################
+  #-----------------------------------------------------------------------------------------
   # TERRAFORM/TERRAGRUNT MODULES
   # ----------------------------------
   # - These are specific IAC modules, either in Terragrunt o terraform that will be executed.
   # - Normally, these modules have their own TaskFile.yml in the folder infrastructure/terraform
-  ###########################################################################################
-    tf-aws-accounts-bootstrap:
-        taskfile: ./infrastructure/terraform/modules/account-creator/TaskFile.yml
-        dir: ./infrastructure/terraform/modules/account-creator
+  #-----------------------------------------------------------------------------------------
+    module:
+        taskfile: ./module/TaskFile.yml
+        dir: ./module
 
-    tg-aws-accounts-bootstrap:
-        taskfile: ./infrastructure/terraform/aws-accounts-bootstrap/TaskFile.yml
-        dir: ./infrastructure/terraform/aws-accounts-bootstrap
+    example-basic:
+        taskfile: ./examples/basic/TaskFile.yml
+        dir: ./examples/basic
 
 tasks:
     default:
@@ -50,64 +50,7 @@ tasks:
         cmds:
             - task: devex:gen-env-aws
 
-    gen-env-terraform:
-        desc: Generate an .env.<env>.terraform file for a given environment
+    module-ci:
+        desc: Run common terraform tasks on module's folder.
         cmds:
-            - task: devex:gen-env-terraform
-
-    tfstate-init:
-        desc: Bootstrap a tfstate S3 bucket, and a Lock table in 'master' environment.
-        dir: ./infrastructure/bootstrap-master-account/tfstate-creator
-        cmds:
-            - |
-              if [ -z "$AWS_ACCESS_KEY_ID" ]; then
-                echo "Error: AWS access key ID is not set"
-                exit 1
-              fi
-
-              if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-                echo "Error: AWS secret access key is not set"
-                exit 1
-              fi
-
-              if [ -f "tfstate-creator" ]; then
-                rm tfstate-creator
-              fi
-
-              go build -o tfstate-creator || { echo "Error building tfstate-creator"; exit 1; }
-              ./tfstate-creator || { echo "Error running tfstate-creator"; exit 1; }
-
-              rm tfstate-creator || { echo "Error deleting bucket-creator"; exit 1; }
-
-  ###########################################################################################
-  # TERRAFORM/TERRAGRUNT/IAC TASKS
-  # ----------------------------------
-  # - These tasks executes normal lifecycle operations for IAC: init, plan, apply, destroy.
-  # - These tasks are executed following this chain of calls: root -> task in module -> reusable
-  #  task. E.g.: TaskFile (root) -> TaskFile (infrastructure/terraform/<module>/Taskfile) ->
-  # Taskfile (reusable DevEx/taskfile/Taskfile.<terraform/terragrunt>.yml)
-  ###########################################################################################
-    tg-aws-accounts-bootstrap-init:
-        desc: Run Terragrunt Init on selected module
-        cmds:
-            - task: tg-aws-accounts-bootstrap:init
-
-    tg-aws-accounts-bootstrap-plan:
-        desc: Run Terragrunt Plan on selected module
-        cmds:
-            - task: tg-aws-accounts-bootstrap:plan
-
-    tg-aws-accounts-bootstrap-apply:
-        desc: Run Terragrunt Apply on selected module
-        cmds:
-            - task: tg-aws-accounts-bootstrap:apply
-
-    tg-aws-accounts-bootstrap-destroy:
-        desc: Run Terragrunt Destroy on selected module
-        cmds:
-            - task: tg-aws-accounts-bootstrap:destroy
-
-    tg-aws-accounts-bootstrap-ci:
-        desc: Run Terragrunt fmt, lint, and checks for selected module
-        cmds:
-            - task: tg-aws-accounts-bootstrap:ci
+            - task: module:ci

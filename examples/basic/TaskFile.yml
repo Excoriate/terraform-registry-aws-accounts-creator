@@ -7,10 +7,10 @@ vars:
 
 includes:
     common:
-        taskfile: ./../DevEx/taskfile/TaskFile.common.yml
+        taskfile: ./../../DevEx/taskfile/TaskFile.common.yml
 
     tf:
-        taskfile: ./../DevEx/taskfile/TaskFile.terraform.yml
+        taskfile: ./../../DevEx/taskfile/TaskFile.terraform.yml
 
 tasks:
     clean:
