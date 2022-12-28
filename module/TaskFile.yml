@@ -1,0 +1,68 @@
+---
+version: '3'
+
+vars:
+    recipe_src_folder: '{{default "recipes/basic" .recipe_src_folder}}'
+    recipe_config_folder: '{{default "config" .recipe_config_folder}}'
+
+    # Opinionated defaults
+    tf_var_file_name: '{{default "fixtures.tfvars" .tf_var_file_name}}'
+
+includes:
+    common:
+        taskfile: ./../../../../DevEx/taskfile/TaskFile.common.yml
+
+    tf:
+        taskfile: ./../../../../DevEx/taskfile/TaskFile.terraform.yml
+
+tasks:
+    clean:
+        desc: Clean all the .terraform directories
+        cmds:
+            - task: common:clean
+
+    init:
+        deps: [clean]
+        cmds:
+            - task: tf:init
+              vars: {TF_WORKING_DIR: '{{.recipe_src_folder}}'}
+
+    plan:
+        deps: [init]
+        cmds:
+            - task: tf:plan
+              vars: {TF_WORKING_DIR: '{{.recipe_src_folder}}', TF_VAR_FILE: '{{.recipe_config_folder}}/{{.tf_var_file_name}}'}
+
+    apply:
+        deps: [init]
+        cmds:
+            - task: tf:apply-vars
+              vars: {TF_WORKING_DIR: '{{.recipe_src_folder}}', TF_VAR_FILE: '{{.recipe_config_folder}}/{{.tf_var_file_name}}'}
+
+    destroy:
+        deps: [init]
+        cmds:
+            - task: tf:destroy-vars
+              vars: {TF_WORKING_DIR: '{{.recipe_src_folder}}', TF_VAR_FILE: '{{.recipe_config_folder}}/{{.tf_var_file_name}}'}
+
+    ci:
+        cmds:
+            - task: tf:fmt-fix
+            - task: tf:validate
+            - task: tf:lint
+            - task: tf:docs
+            - task: tf:plan
+              vars:
+                  TF_WORKING_DIR: ./recipe
+
+    ci-ro:
+        cmds:
+            - task: tf:fmt-fix
+            - task: tf:validate
+            - task: tf:lint
+            - task: tf:docs
+
+    docs:
+        deps: [clean]
+        cmds:
+            - task: tf:docs
