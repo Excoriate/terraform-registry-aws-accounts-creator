@@ -47,7 +47,6 @@ jobs:
         defaults:
             run:
                 working-directory: examples/basic
-        needs: CI-module
         steps:
             - uses: actions/checkout@v2
             - uses: hashicorp/setup-terraform@v1
