@@ -6,8 +6,8 @@ on:
         branches:
             - main
             - master
+            - production
         paths-ignore:
-            - package.json
             - TaskFile.yml
             - CHANGELOG.md
 
