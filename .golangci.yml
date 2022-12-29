@@ -1,12 +1,4 @@
 ---
-#issues:
-#    exclude-rules:
-#        - path: tests/(?<!unit|integration).*_test\.go
-#          linters:
-#              - dupl
-#              - gosec
-#              - goconst
-
 linters:
     enable:
         - bodyclose
