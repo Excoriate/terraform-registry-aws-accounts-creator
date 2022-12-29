@@ -5,7 +5,7 @@ process easy and effective for everyone involved.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/alextorres-warner/amigo-cli/issues) is the preferred channel for [bug reports](#bugs),
+The [issue tracker](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/issues) is the preferred channel for [bug reports](#bugs),
 [features requests](#features) and [submitting pull
 requests](#pull-requests), but please respect the following restrictions:
 

@@ -1,15 +1,15 @@
 ---
-issues:
-    exclude-rules:
-        - path: _test\.go
-          linters:
-              - dupl
-              - gosec
-              - goconst
+#issues:
+#    exclude-rules:
+#        - path: tests/(?<!unit|integration).*_test\.go
+#          linters:
+#              - dupl
+#              - gosec
+#              - goconst
+
 linters:
     enable:
         - bodyclose
-        - deadcode
         - depguard
         - dupl
         - errcheck
@@ -22,18 +22,15 @@ linters:
         - revive
         - govet
         - ineffassign
-        - interfacer
         - misspell
         - nakedret
         - prealloc
         - staticcheck
-        - structcheck
         - stylecheck
         - typecheck
         - unconvert
         - unparam
         - unused
-        - varcheck
         - whitespace
 
 linters-settings:

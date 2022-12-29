@@ -1,5 +1,5 @@
 module "target" {
-  source         = "../../../../../module"
+  source         = "../../../../module"
   aws_org_config = var.aws_org_config
   aws_region     = var.aws_region
   is_enabled     = var.is_enabled
