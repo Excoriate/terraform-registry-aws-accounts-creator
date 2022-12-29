@@ -22,6 +22,7 @@
 3. [Developer Experience](#developer-experience)
    1. [Tools used](#tools-used)
    2. [Configuring AWS credentials for local development](#configuring-aws-credentials-for-local-development)
+   3. [Running common development actions](#running-common-actions-for-local-development)
 4. [Contributions](#contributing)
 5. [License](#license)
 6. [Contact](#contact)
@@ -98,6 +99,35 @@ In simple terms, that tasks (which runs a shell script) scan your pre-existing A
 # dev refers to the environment selected, which's how the file is also named. E.g.: env.dev.aws
 ENV=dev task module-plan
 ```
+
+### Running common actions for local development
+Run unit tests (wrapping [Terratest](https://terratest.gruntwork.io/)):
+```bash
+# If you want to list the available tasks.
+task list
+# Run the unit tests.
+task test-unit
+```
+
+Run integration tests — if exists (wrapping [Terratest](https://terratest.gruntwork.io/)):
+```bash
+# If you want to list the available tasks.
+task list
+# Run the unit tests.
+task test-integration
+```
+
+Run all the configured **pre-commit** hooks (forcing them to run on all files):
+```bash
+task pre-commit
+```
+
+Run a vanilla terraform plan over the `example/basic` example:
+```bash
+task example-basic-plan
+```
+
+---
 
 ## Module Versioning
 

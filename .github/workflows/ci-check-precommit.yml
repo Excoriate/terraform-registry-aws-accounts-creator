@@ -27,6 +27,7 @@ jobs:
             - name: Install TfLInt and NodeJS
               run: |
                   npm install -g markdown-link-check
+            - uses: golangci/golangci-lint-action@v3
             - uses: pre-commit/action@v3.0.0
               with:
                   pre-commit.config: ${{ env.PRE_COMMIT_CONFIG }}
