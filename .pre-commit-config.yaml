@@ -38,13 +38,13 @@ repos:
     - repo: https://github.com/mineiros-io/pre-commit-hooks
       rev: v0.4.3
       hooks:
+          - id: golangci-lint
           - id: terraform-fmt
             files: ^module/.*\.tf$
           - id: terraform-validate
             files: ^module/.*\.tf$
-            exclude: ^examples|.terraform/
+            exclude: ^examples|.terraform/|tests/.*\.tf$
           - id: tflint
-            exclude: ^examples|.terraform/
-            files: ^module/.*\.tf$
+            exclude: ^examples|.terraform/|tests/.*\.tf$
           - id: markdown-link-check
             args: [-p]

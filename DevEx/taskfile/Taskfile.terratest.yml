@@ -1,0 +1,82 @@
+---
+version: '3'
+
+vars:
+    working_dir: '{{default "." .working_dir}}'
+
+
+tasks:
+    clean:
+        desc: Clean all the .terraform cache, and golang cache or binaries compiled if applicable.
+        dir: '{{.working_dir}}'
+        cmds:
+            - |
+              echo "Current working directory path: $(pwd)"
+              echo "working_dir_unit: {{.working_dir}}"
+              echo "----------------------------------"
+              echo
+
+              ls -ltrah
+
+              if [ -f "go.mod" ]; then
+                go clean -cache -testcache -modcache -i -r
+              fi
+
+              if [ -d ".terraform" ]; then
+                rm -rf .terraform
+              fi
+
+    is-valid-terratest:
+        desc: Check if the terratest folder is valid
+        dir: '{{.working_dir}}'
+        cmds:
+            - |
+              echo "Current working directory path: $(pwd)"
+              echo "working_dir_unit: {{.working_dir}}"
+              echo "----------------------------------"
+              echo
+              TEST_FILES=$(find . -name "*_test.go")
+
+              # If there are Go test files, run the tests
+              if [ -n "$TEST_FILES" ]; then
+                echo "Terratest folder is valid"
+              else
+                echo "Terratest folder is not valid"
+                exit 1
+              fi
+
+    run-all-nocache:
+        desc: Run all the Go tests in this directory, without cache.
+        dir: '{{.working_dir}}'
+        cmds:
+            - |
+              echo "Current working directory path: $(pwd)"
+              echo "working_dir_unit: {{.working_dir}}"
+              echo "----------------------------------"
+              echo
+
+              TEST_FILES=$(find . -name "*_test.go")
+
+              if [ -n "$TEST_FILES" ]; then
+                  go test -v -count=1 -timeout 30m -parallel 128 -run . $TEST_FILES
+              else
+                  echo "No Go test found, perhaps you should run task is-valid-terratest first?"
+                  exit 1
+              fi
+
+    run-all-cache:
+        dir: '{{.working_dir}}'
+        desc: Run all the Go tests in this directory, with cache.
+        cmds:
+            - |
+              echo "Current working directory path: $(pwd)"
+              echo "working_dir_unit: {{.working_dir}}"
+              echo "----------------------------------"
+              echo
+              TEST_FILES=$(find . -name "*_test.go")
+              if [ -n "$TEST_FILES" ]; then
+                go test -v -timeout 30m -parallel 128 -run . $TEST_FILES
+              else
+                echo "No Go test found, perhaps you should run task is-valid-terratest first?"
+                exit 1
+              fi

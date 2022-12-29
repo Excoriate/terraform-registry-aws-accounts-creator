@@ -31,6 +31,10 @@ includes:
         taskfile: ./module/TaskFile.yml
         dir: ./module
 
+    test:
+        taskfile: ./tests/TaskFile.yml
+        dir: ./tests
+
     example-basic:
         taskfile: ./examples/basic/TaskFile.yml
         dir: ./examples/basic
@@ -81,3 +85,13 @@ tasks:
         cmds:
             - task: example-basic:ci
             - task: example-basic:docs
+
+    test-unit:
+        desc: Run unit tests
+        cmds:
+            - task: test:run-unit-all-nocache
+
+    test-integration:
+        desc: Run integration tests
+        cmds:
+            - task: test:run-integration-all-nocache

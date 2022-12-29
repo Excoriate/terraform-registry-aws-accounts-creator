@@ -1,0 +1,45 @@
+---
+version: '3'
+
+vars:
+    working_dir_unit: '{{default "unit" .working_dir_unit}}'
+    working_dir_integration: '{{default "integration" .working_dir_integration}}'
+    # Refers to the specific (Go) module's directory
+    target_dir: '{{default "basic" .target_dir}}'
+
+includes:
+    tt:
+        taskfile: ./../DevEx/taskfile/TaskFile.terratest.yml
+
+tasks:
+    clean-unit:
+        desc: Clean go cache and terraform cache of the unit set of tests
+        cmds:
+            - task: tt:is-valid-terratest
+            - task: tt:clean
+              vars:
+                  working_dir: '{{.working_dir_unit}}/{{.target_dir}}'
+
+    clean-integration:
+        desc: Clean go cache and terraform cache of the integration set of tests
+        cmds:
+            - task: tt:is-valid-terratest
+            - task: tt:clean
+              vars:
+                  working_dir: '{{.working_dir_unit}}/{{.target_dir}}'
+
+    run-unit-all-nocache:
+        desc: Run all the Go tests (unit tests) in this directory, without cache.
+        deps: [clean-unit]
+        cmds:
+            - task: tt:run-all-nocache
+              vars:
+                  working_dir: '{{.working_dir_unit}}/{{.target_dir}}'
+
+    run-integration-all-nocache:
+        desc: Run all the Go tests (integration tests) in this directory, without cache.
+        deps: [clean-unit]
+        cmds:
+            - task: tt:run-all-nocache
+              vars:
+                  working_dir: '{{.working_dir_unit}}/{{.target_dir}}'

@@ -41,9 +41,8 @@ repos:
             files: ^module/.*\.tf$
           - id: terraform-validate
             files: ^module/.*\.tf$
-            exclude: ^examples|.terraform/
+            exclude: ^examples|.terraform/|tests/.*\.tf$
           - id: tflint
-            exclude: ^examples|.terraform/
-            files: ^module/.*\.tf$
+            exclude: ^examples|.terraform/|tests/.*\.tf$
           - id: markdown-link-check
             args: [-p]

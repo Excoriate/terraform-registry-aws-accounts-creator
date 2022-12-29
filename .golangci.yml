@@ -1,0 +1,50 @@
+---
+issues:
+    exclude-rules:
+        - path: _test\.go
+          linters:
+              - dupl
+              - gosec
+              - goconst
+linters:
+    enable:
+        - bodyclose
+        - deadcode
+        - depguard
+        - dupl
+        - errcheck
+        - gocritic
+        - gofmt
+        - goconst
+        - goimports
+        - gosec
+        - gosimple
+        - revive
+        - govet
+        - ineffassign
+        - interfacer
+        - misspell
+        - nakedret
+        - prealloc
+        - staticcheck
+        - structcheck
+        - stylecheck
+        - typecheck
+        - unconvert
+        - unparam
+        - unused
+        - varcheck
+        - whitespace
+
+linters-settings:
+    errcheck:
+        check-blank: true
+        ignore: fmt:.*,[rR]ead|[wW]rite|[cC]lose,io:Copy
+    govet:
+        check-shadowing: true
+    gocyclo:
+        min-complexity: 15
+    maligned:
+        suggest-new: true
+    gofmt:
+        simplify: true
