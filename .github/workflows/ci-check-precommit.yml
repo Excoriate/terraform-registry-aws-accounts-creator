@@ -9,7 +9,7 @@ on:
         types: [opened, edited, synchronize]
 
 env:
-    PRE_COMMIT_CONFIG: ./.github/pre-commit-config-in-automation.yaml
+    PRE_COMMIT_CONFIG: pre-commit-config-githubactions.yaml
 
 jobs:
     run-all-hooks:
