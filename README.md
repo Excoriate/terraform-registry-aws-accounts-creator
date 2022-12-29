@@ -9,6 +9,7 @@
 [![Auto Release](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml/badge.svg)](https://github.com/Excoriate/vault-labs/actions/workflows/release.yml)
 [![Terraform Check](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-check-terraform.yml/badge.svg)](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-check-terraform.yml)
 [![Run pre-commit](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-check-precommit.yml/badge.svg)](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-check-precommit.yml)
+[![Terratest](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-pr-terratest.yml/badge.svg)](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-pr-terratest.yml)
 
 [//]: # (FIXME: Change the badges accordingly (template)
 
@@ -23,6 +24,7 @@
    1. [Tools used](#tools-used)
    2. [Configuring AWS credentials for local development](#configuring-aws-credentials-for-local-development)
    3. [Running common development actions](#running-common-actions-for-local-development)
+   4. [Running tests](#tests)
 4. [Contributions](#contributing)
 5. [License](#license)
 6. [Contact](#contact)
@@ -126,6 +128,10 @@ Run a vanilla terraform plan over the `example/basic` example:
 ```bash
 task example-basic-plan
 ```
+
+### Tests
+See the detailed documentation [here](./tests/README.md).
+
 
 ---
 
