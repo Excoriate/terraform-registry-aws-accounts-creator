@@ -14,7 +14,7 @@ func TestIsEnabled(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir: "./target/basic",
+		TerraformDir: "../target/basic",
 		Vars:         getInputVarsValues(t, true),
 		Upgrade:      false,
 	}
