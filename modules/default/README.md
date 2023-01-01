@@ -15,7 +15,7 @@ Examples of this module's usage are available in the [examples](./examples) fold
 
 ```hcl
 module "main_module" {
-  source     = "../../module"
+  source     = "../../../modules"
   is_enabled = var.is_enabled
   aws_org_config = {
     aws_accounts = [{

@@ -45,6 +45,6 @@
 .env.master.aws
 # Automatically generated. Do not modify. Check DevDex/scripts/aws/set-aws-creds.sh for more details...
 .env.master.terraform
-/module/.terraform.lock.hcl
+/modules/default/.terraform.lock.hcl
 # Automatically generated. Do not modify. Check DevDex/scripts/aws/set-aws-creds.sh for more details...
 .env.sandbox.aws

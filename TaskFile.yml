@@ -11,6 +11,10 @@ version: '3'
 env:
     TARGET_ENVIRONMENT: '{{.ENV}}'
 
+vars:
+    MODULE: '{{default "default" .MODULE}}'
+    EXAMPLE: '{{default "basic" .EXAMPLE}}'
+
 dotenv: ['.env.{{.TARGET_ENVIRONMENT}}.aws', '.env.{{.TARGET_ENVIRONMENT}}.terraform']
 
 includes:
@@ -28,16 +32,16 @@ includes:
   # - Normally, these modules have their own TaskFile.yml in the folder infrastructure/terraform
   #-----------------------------------------------------------------------------------------
     module:
-        taskfile: ./module/TaskFile.yml
-        dir: ./module
+        taskfile: ./modules/TaskFile.yml
+        dir: ./modules
 
     test:
         taskfile: ./tests/TaskFile.yml
         dir: ./tests
 
-    example-basic:
-        taskfile: ./examples/basic/TaskFile.yml
-        dir: ./examples/basic
+    example:
+        taskfile: ./examples/TaskFile.yml
+        dir: ./examples
 
 tasks:
     default:
@@ -63,12 +67,13 @@ tasks:
         desc: Run Terraform Init on module's source code.
         cmds:
             - task: module:init
+              vars: {TF_MODULE: '{{.MODULE}}'}
 
     module-ci:
         desc: Run common terraform tasks on module's folder.
         cmds:
-            - task: module:docs
             - task: module:ci
+              vars: {TF_MODULE: '{{.MODULE}}'}
 
     example-basic-init:
         desc: Run Terraform Init on module's example recipe source code.

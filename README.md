@@ -40,7 +40,7 @@
 
 
 ## Module documentation
-The documentation is **automatically generated** by [terraform-docs](https://terraform-docs.io), and it's available in the module's [README.md](./module/README.md) file.
+The documentation is **automatically generated** by [terraform-docs](https://terraform-docs.io), and it's available in the module's [README.md](modules/default/README.md) file.
 ### Capabilities
 [//]: # (FIXME: Complete and fill/change it accordingly (template)
 

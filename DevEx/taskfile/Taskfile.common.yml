@@ -2,7 +2,6 @@
 version: '3'
 
 env:
-#  SKIP_copy: true
 
 tasks:
     clean:
