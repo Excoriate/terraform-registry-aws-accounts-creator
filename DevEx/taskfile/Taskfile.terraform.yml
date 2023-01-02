@@ -38,11 +38,10 @@ tasks:
                 echo
               fi
 
-              if [ "{{.TF_WORKING_DIR}}" == "default" ]; then
-                echo "Validation Result"
-                echo "============================================================"
-                echo "All passed"
-              fi
+              echo "Validation Result"
+              echo "============================================================"
+              echo "All passed"
+
     silent: true
 
     init:
@@ -54,7 +53,6 @@ tasks:
             - |
               echo "Working directory passed: {{.TF_WORKING_DIR}}"
               echo "Full path: $(pwd)/{{.TF_WORKING_DIR}}"
-
 
               cd {{.TF_WORKING_DIR}}
 
