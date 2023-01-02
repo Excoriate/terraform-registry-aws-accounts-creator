@@ -1,5 +1,5 @@
 module "main_module" {
-  source     = "../../../modules"
+  source     = "../../../modules/default"
   is_enabled = var.is_enabled
   aws_org_config = {
     aws_accounts = [{

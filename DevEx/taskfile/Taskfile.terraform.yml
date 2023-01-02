@@ -41,8 +41,7 @@ tasks:
               echo "Validation Result"
               echo "============================================================"
               echo "All passed"
-
-    silent: true
+        silent: true
 
     init:
         deps:
@@ -96,7 +95,9 @@ tasks:
 
               if [ -n "{{.TF_VARS_FILE}}" ]; then
                 terraform plan -var-file={{.TF_VARS_FILE}}
+                echo "[ ! ] Using variables file: {{.TF_VARS_FILE}}"
               else
+                echo "[ ! ] No variables file provided, running terraform plan without -var-file flag"
                 terraform plan
               fi
         silent: true

@@ -75,21 +75,25 @@ tasks:
             - task: module:ci
               vars: {TF_MODULE: '{{.MODULE}}'}
 
-    example-basic-init:
+    example-init:
         desc: Run Terraform Init on module's example recipe source code.
         cmds:
-            - task: example-basic:init
+            - task: example:init
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
 
-    example-basic-plan:
+    example-plan:
         desc: Run Terraform Plan on module's example recipe source code.
         cmds:
-            - task: example-basic:plan
+            - task: example:plan
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
 
-    example-basic-ci:
+    example-ci:
         desc: Run Set of checks, fmt and linting operations over the example's module.
         cmds:
-            - task: example-basic:ci
-            - task: example-basic:docs
+            - task: example:ci
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
+            - task: example:docs
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
 
     test-unit:
         desc: Run unit tests
