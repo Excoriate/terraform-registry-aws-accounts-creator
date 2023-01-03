@@ -98,9 +98,23 @@ tasks:
     test-unit:
         desc: Run unit tests
         cmds:
-            - task: test:run-unit-all-nocache
+            - task: test:run-unit-all
+              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
 
     test-integration:
         desc: Run integration tests
         cmds:
+            - task: test:run-integration-all
+              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
+
+    test-unit-nocache:
+        desc: Run unit tests (no cache)
+        cmds:
+            - task: test:run-unit-all-nocache
+              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
+
+    test-integration-nocache:
+        desc: Run integration tests (no cache)
+        cmds:
             - task: test:run-integration-all-nocache
+              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
