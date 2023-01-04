@@ -1,6 +1,4 @@
 <!-- BEGIN_TF_DOCS -->
-
-[//]: # (&#40;FIXME: Complete and fill/change it accordingly &#40;template&#41;)
 # ☁️ AWS Account Creator Module
 ## Description
 
@@ -13,11 +11,11 @@ A summary of its main features:
 
 ---
 ## Example
-Examples of this module's usage are available in the [examples](../../examples) folder.
+Examples of this module's usage are available in the [examples](./examples) folder.
 
 ```hcl
 module "main_module" {
-  source     = "../../../modules"
+  source     = "../../../modules/default"
   is_enabled = var.is_enabled
   aws_org_config = {
     aws_accounts = [{
@@ -48,6 +46,16 @@ output "aws_region_for_deploy_this" {
   description = "The AWS region where the module is deployed."
 }
 
+output "tags_set"{
+  value       = var.tags
+  description = "The tags set for the module."
+}
+
+/*
+-------------------------------------
+Custom outputs
+-------------------------------------
+*/
 output "aws_org_principals" {
   value       = local.aws_org_principals
   description = "List of AWS Organization principals"
@@ -111,4 +119,5 @@ No modules.
 | <a name="output_aws_org_units"></a> [aws\_org\_units](#output\_aws\_org\_units) | List of AWS Organization units |
 | <a name="output_aws_region_for_deploy_this"></a> [aws\_region\_for\_deploy\_this](#output\_aws\_region\_for\_deploy\_this) | The AWS region where the module is deployed. |
 | <a name="output_is_enabled"></a> [is\_enabled](#output\_is\_enabled) | Whether the module is enabled or not. |
+| <a name="output_tags_set"></a> [tags\_set](#output\_tags\_set) | The tags set for the module. |
 <!-- END_TF_DOCS -->
