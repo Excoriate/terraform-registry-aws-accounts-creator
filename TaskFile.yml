@@ -118,3 +118,16 @@ tasks:
         cmds:
             - task: test:run-integration-all-nocache
               vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
+
+    init:
+        desc: Generate code using the built-in CLI.
+        cmds:
+            - |
+              cd DevEx/scripts/config/generator
+
+              if [ -f gen-cli ]; then
+                rm gen-cli
+              fi
+
+              go build -o gen-cli
+            - ./DevEx/scripts/config/generator/gen-cli

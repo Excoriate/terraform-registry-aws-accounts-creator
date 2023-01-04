@@ -38,13 +38,19 @@
 **/.terragrunt-cache/
 .terraform/
 
-*.env
+# Ignore go generated binaries
+
+
+*.env.*
 # Automatically generated. Do not modify. Check DevDex/scripts/aws/set-aws-creds.sh for more details...
 .env.master
 # Automatically generated. Do not modify. Check DevDex/scripts/aws/set-aws-creds.sh for more details...
 .env.master.aws
 # Automatically generated. Do not modify. Check DevDex/scripts/aws/set-aws-creds.sh for more details...
 .env.master.terraform
-/modules/default/.terraform.lock.hcl
+/modules/**/.terraform.lock.hcl
 # Automatically generated. Do not modify. Check DevDex/scripts/aws/set-aws-creds.sh for more details...
 .env.sandbox.aws
+
+
+/DevEx/scripts/config/generator/gen-cli
