@@ -12,16 +12,24 @@ env:
     AWS_DEFAULT_REGION: us-east-1
 
 jobs:
-    CI-module:
+    CI-modules:
+        name: CI - Modules
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - name: default
+                      tf_version: 1.3.6
+
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: module
+                working-directory: modules/${{ matrix.name }}
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: hashicorp/setup-terraform@v1
               with:
-                  terraform_version: latest
+                  terraform_version: ${{ matrix.tf_version }}
             - run: terraform init
             - run: terraform validate
             - run: terraform fmt -check=true
@@ -40,18 +48,27 @@ jobs:
                   tflint --disable-rule=terraform_module_pinned_source
                   tflint .
 
-
-    CI-examples-basic:
+    CI-recipes:
+        name: CI - Recipes
         runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - name: basic
+                      module: default
+                      tf_version: 1.3.6
+
         defaults:
             run:
-                working-directory: examples/basic
-        needs: CI-module
+                working-directory: examples/${{ matrix.module }}/${{ matrix.name }}
+
+        needs: CI-modules
         steps:
             - uses: actions/checkout@v2
             - uses: hashicorp/setup-terraform@v1
               with:
-                  terraform_version: latest
+                  terraform_version: ${{ matrix.tf_version }}
             - run: terraform init
             - run: terraform validate
             - run: terraform fmt -check=true
