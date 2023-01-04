@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+
+[//]: # (&#40;FIXME: Complete and fill/change it accordingly &#40;template&#41;)
 # ☁️ AWS Account Creator Module
 ## Description
 
@@ -11,7 +13,7 @@ A summary of its main features:
 
 ---
 ## Example
-Examples of this module's usage are available in the [examples](./examples) folder.
+Examples of this module's usage are available in the [examples](../../examples) folder.
 
 ```hcl
 module "main_module" {

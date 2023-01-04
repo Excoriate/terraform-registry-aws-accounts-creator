@@ -22,4 +22,6 @@ func TestDefaultBasicIntegrationIsDisabled(t *testing.T) {
   terraform.Init(t, terraformOptions)
 
   terraform.Plan(t, terraformOptions)
+
+  terraform.Apply(t, terraformOptions)
 }

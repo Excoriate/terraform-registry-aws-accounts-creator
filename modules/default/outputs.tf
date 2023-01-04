@@ -8,6 +8,16 @@ output "aws_region_for_deploy_this" {
   description = "The AWS region where the module is deployed."
 }
 
+output "tags_set"{
+  value       = var.tags
+  description = "The tags set for the module."
+}
+
+/*
+-------------------------------------
+Custom outputs
+-------------------------------------
+*/
 output "aws_org_principals" {
   value       = local.aws_org_principals
   description = "List of AWS Organization principals"

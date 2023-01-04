@@ -17,6 +17,11 @@ variable "tags" {
   default     = {}
 }
 
+/*
+-------------------------------------
+Custom input variables
+-------------------------------------
+*/
 variable "aws_org_config" {
   type = object({
     // Main org configuration
