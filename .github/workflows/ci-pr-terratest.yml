@@ -1,5 +1,5 @@
 ---
-name: Terratest
+name: Unit & Integration tests
 
 on:
     pull_request:
