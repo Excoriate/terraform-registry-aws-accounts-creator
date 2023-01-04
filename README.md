@@ -11,7 +11,6 @@
 [![Run pre-commit](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-check-precommit.yml/badge.svg)](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-check-precommit.yml)
 [![Terratest](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-pr-terratest.yml/badge.svg)](https://github.com/Excoriate/terraform-registry-aws-accounts-creator/actions/workflows/ci-pr-terratest.yml)
 
-[//]: # (FIXME: Change the badges accordingly (template)
 
 ## Table of Contents
 1. [About The Module](#about-the-module)
@@ -33,8 +32,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Module
-[//]: # (FIXME: Complete and fill/change it accordingly (template)
-(put high level description here)
+This module encapsulate a set of modules that configure, and provision accounts-related resources on AWS.
 
 ---
 
@@ -42,17 +40,15 @@
 ## Module documentation
 The documentation is **automatically generated** by [terraform-docs](https://terraform-docs.io), and it's available in the module's [README.md](modules/default/README.md) file.
 ### Capabilities
-[//]: # (FIXME: Complete and fill/change it accordingly (template)
+#### Module: Default
+1. Allows to create one or many AWS accounts.
+2. Allows to set organizational units for these accounts, or attach them directly into the root AWS Org.
 
-(put description here)
 ### Getting Started
-[//]: # (FIXME: Complete and fill/change it accordingly (template)
+Check the example recipes 🥗 [here](examples)
 
-(put description here)
 ### Roadmap
-[//]: # (FIXME: Complete and fill/change it accordingly (template)
-
-(put description here)
+- [ ] Add support for SCP.
 
 ### Module standard structure
 The module's relevant components, structure and "skeleton" is described below:
