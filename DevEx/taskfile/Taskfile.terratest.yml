@@ -116,10 +116,24 @@ tasks:
               testName="Test${module^}${recipe^}${testType^}"
               testDirResolved="$module/$testType"
 
-              cd $testDirResolved
-              go test -v -count=1 -timeout 30m -parallel 128 -run "^$testName"
+              if [ ! -d "$testDirResolved" ]; then
+                  echo "[ x ] Invalid test directory. Could not find $testDirResolved"
+                  exit 1
+              fi
 
-              echo "[ ok ] Finished running terratest tests"
+              cd $testDirResolved
+
+              pattern="$testName"
+              function_names=$(grep -r -E -o "$pattern[^(]*" . | sort | uniq)
+
+              if [ -z "$function_names" ]; then
+                echo "[ x ] No tests found with prefix $pattern"
+                exit 1
+              else
+                echo "[ ! ] Found tests: $function_names"
+                go test -v -count=1 -timeout 30m -parallel 128 -run "^$testName"
+                echo "[ ok ] Finished running terratest tests"
+              fi
         silent: true
 
     run-all-cache:
@@ -141,9 +155,23 @@ tasks:
               testName="Test${module^}${recipe^}${testType^}"
               testDirResolved="$module/$testType"
 
+              if [ ! -d "$testDirResolved" ]; then
+                  echo "[ x ] Invalid test directory. Could not find $testDirResolved"
+                  exit 1
+              fi
 
               cd $testDirResolved
-              go test -v -timeout 30m -parallel 128 -run "^$testName"
 
-              echo "[ ok ] Finished running terratest tests"
+              pattern="$testName"
+              function_names=$(grep -r -E -o "$pattern[^(]*" . | sort | uniq)
+
+              if [ -z "$function_names" ]; then
+                echo "[ x ] No tests found with prefix $pattern"
+                exit 1
+              else
+                echo "[ ! ] Found tests: $function_names"
+                go test -v -timeout 30m -parallel 128 -run "^$testName"
+                echo "[ ok ] Finished running terratest tests"
+              fi
+
         silent: true

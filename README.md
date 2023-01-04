@@ -57,30 +57,56 @@ The documentation is **automatically generated** by [terraform-docs](https://ter
 ### Module standard structure
 The module's relevant components, structure and "skeleton" is described below:
 ```txt
+├── README.md
+├── TaskFile.yml
+├── docs
+│   └── contribution_guidelines.md
 ├── examples
-│   └── basic
-│       ├── TaskFile.yml
-│       ├── config
-│       │   └── fixtures.tfvars
-│       ├── main.tf
-│       ├── providers.tf
-│       ├── variables.tf
-│       └── versions.tf
-├── module
 │   ├── README.md
 │   ├── TaskFile.yml
-│   ├── data.tf
-│   ├── locals.tf
-│   ├── main.tf
-│   ├── outputs.tf
-│   ├── variables.tf
-│   └── versions.tf
+│   └── default
+│       └── basic
+│           ├── README.md
+│           ├── config
+│           │   └── fixtures.tfvars
+│           ├── main.tf
+│           ├── providers.tf
+│           ├── variables.tf
+│           └── versions.tf
+├── modules
+│   ├── TaskFile.yml
+│   └── default
+│       ├── README.md
+│       ├── data.tf
+│       ├── locals.tf
+│       ├── main.tf
+│       ├── outputs.tf
+│       ├── variables.tf
+│       └── versions.tf
+├── pre-commit-config-githubactions.yaml
 └── tests
-
+    ├── README.md
+    ├── TaskFile.yml
+    └── default
+        ├── integration
+        │   ├── default_basic_integration_test.go
+        │   ├── go.mod
+        │   ├── go.sum
+        │   └── target
+        │       └── basic
+        │           └── main.tf
+        └── unit
+            ├── default_basic_unit_test.go
+            ├── go.mod
+            ├── go.sum
+            └── target
+                └── basic
+                    └── main.tf
 ```
 Where:
-* _Module_: refers to the actual module's directory. Where the `.tf` files reside.
-* _Examples_: refers to the examples directory, where the examples recipes lives. These are also used for testing the infrastructure using [Terratest](https://terratest.gruntwork.io/).
+* **⚡️Modules**: refers to the actual module's directory. Where the `.tf` files reside. Each `subdirectory` is a module.
+* **⚡️Examples**: refers to the examples directory, where the examples recipes lives. These are also used for testing the infrastructure using [Terratest](https://terratest.gruntwork.io/). For its specific documentation, query [this link](examples/README.md)
+* **⚡️Tests**: refers to the tests directory, where the tests recipes lives. These are also used for testing the infrastructure using [Terratest](https://terratest.gruntwork.io/). For its specific documentation, query [this link](tests/README.md)
 
 ## Developer Experience
 Some tools that this repo uses:
@@ -88,9 +114,16 @@ Some tools that this repo uses:
 - 🧰 Go — justified mostly for **[Terratest](https://terratest.gruntwork.io/)**
 - 🧰 [TaskFile](https://taskfile.dev/#/) — for the automation of the tasks.
 >**NOTE**: For automation during the development process, I use [precommit](https://pre-commit.com/), which is a framework for managing and maintaining multi-language pre-commit hooks. It's a great tool, and I highly recommend it. All the hooks required are installed by [this](./DevEx/scripts/hooks/install-pre-commit-hooks-deps.sh) script. It's recommended though to run it through the [TaskFile](./TaskFile.yml) task `pre-commit-init`.
+
+To initialize your pre-commit configuration, and ensure all the hooks are installed, run the following command:
 ```bash
 task pre-commit-init
 ```
+To run these hooks against all the files, you can use the following `Task` command:
+```bash
+task pre-commit
+```
+
 ### Configuring AWS credentials for local development
 For sure you've seen that in the main Taskfile, there's a task called `gen-env-aws`. That task aims to generate a proper `.env.<env>.aws` **dotEnv** file which is used by the `TaskFile.yml` tasks. If you have a proper AWS credentials file, you can run the following command:
 ```bash
@@ -124,9 +157,10 @@ Run all the configured **pre-commit** hooks (forcing them to run on all files):
 task pre-commit
 ```
 
-Run a vanilla terraform plan over the `example/basic` example:
+Run a vanilla terraform plan over the `example/basic` (recipe) example:
 ```bash
-task example-basic-plan
+# No arguments are required, since it's using its defaults: example as the module's name, and basic as its recipe's name.
+task recipe-plan
 ```
 
 ### Tests

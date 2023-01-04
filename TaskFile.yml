@@ -13,7 +13,7 @@ env:
 
 vars:
     MODULE: '{{default "default" .MODULE}}'
-    EXAMPLE: '{{default "basic" .EXAMPLE}}'
+    RECIPE: '{{default "basic" .RECIPE}}'
 
 dotenv: ['.env.{{.TARGET_ENVIRONMENT}}.aws', '.env.{{.TARGET_ENVIRONMENT}}.terraform']
 
@@ -75,46 +75,46 @@ tasks:
             - task: module:ci
               vars: {TF_MODULE: '{{.MODULE}}'}
 
-    example-init:
+    recipe-init:
         desc: Run Terraform Init on module's example recipe source code.
         cmds:
             - task: example:init
-              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
 
-    example-plan:
+    recipe-plan:
         desc: Run Terraform Plan on module's example recipe source code.
         cmds:
             - task: example:plan
-              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
 
-    example-ci:
+    recipe-ci:
         desc: Run Set of checks, fmt and linting operations over the example's module.
         cmds:
             - task: example:ci
-              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
             - task: example:docs
-              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
 
     test-unit:
         desc: Run unit tests
         cmds:
             - task: test:run-unit-all
-              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
 
     test-integration:
         desc: Run integration tests
         cmds:
             - task: test:run-integration-all
-              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
 
     test-unit-nocache:
         desc: Run unit tests (no cache)
         cmds:
             - task: test:run-unit-all-nocache
-              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}
 
     test-integration-nocache:
         desc: Run integration tests (no cache)
         cmds:
             - task: test:run-integration-all-nocache
-              vars: {TF_MODULE: '{{.MODULE}}', RECIPE: '{{.EXAMPLE}}'}
+              vars: {TF_MODULE: '{{.MODULE}}', TF_EXAMPLE_RECIPE: '{{.RECIPE}}'}

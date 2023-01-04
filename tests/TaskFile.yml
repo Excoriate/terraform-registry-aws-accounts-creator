@@ -3,7 +3,7 @@ version: '3'
 
 vars:
     TF_MODULE: '{{default "default" .TF_MODULE}}'
-    TF_EXAMPLE_RECIPE: '{{default "basic" .RECIPE}}'
+    TF_EXAMPLE_RECIPE: '{{default "basic" .TF_EXAMPLE_RECIPE}}'
     UNIT_TEST_DIR: '{{default "unit" .UNIT_TEST_DIR}}'
     INTEGRATION_TEST_DIR: '{{default "integration" .INTEGRATION_TEST_DIR}}'
 
@@ -35,9 +35,9 @@ tasks:
         desc: Run all the Go tests (integration tests) in this directory, without cache.
         deps:
             - task: pre-checks
-              vars: {SRC_DIR: '{{.TF_MODULE}}/{{.INTEGRATION_TEST_DIR}}', TEST_TYPE: unit, TEST_NAME_PREFIX: '{{.TF_EXAMPLE_RECIPE}}'}
+              vars: {SRC_DIR: '{{.TF_MODULE}}/{{.INTEGRATION_TEST_DIR}}', TEST_TYPE: integration, TEST_NAME_PREFIX: '{{.TF_EXAMPLE_RECIPE}}'}
             - task: tt:clean
-              vars: {SRC_DIR: '{{.TF_MODULE}}/{{.INTEGRATION_TEST_DIR}}', TEST_TYPE: unit, TEST_NAME_PREFIX: '{{.TF_EXAMPLE_RECIPE}}'}
+              vars: {SRC_DIR: '{{.TF_MODULE}}/{{.INTEGRATION_TEST_DIR}}', TEST_TYPE: integration, TEST_NAME_PREFIX: '{{.TF_EXAMPLE_RECIPE}}'}
         cmds:
             - task: tt:run-all-nocache
               vars: {SRC_DIR: '{{.TF_MODULE}}/{{.INTEGRATION_TEST_DIR}}', TEST_TYPE: integration, TEST_NAME_PREFIX: '{{.TF_EXAMPLE_RECIPE}}'}

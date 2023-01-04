@@ -4,8 +4,8 @@ version: '3'
 vars:
     TF_MODULE: '{{default "default" .TF_MODULE}}'
     TF_EXAMPLE_RECIPE: '{{default "basic" .TF_EXAMPLE_RECIPE}}'
-    TF_VARS_FILE: '{{default "config/fixtures.tfvars" .TF_VARS_FILE}}'
-    TF_BACKEND_CONFIG: '{{default "config/remote.config" .TF_BACKEND_CONFIG}}'
+    TF_VARS: '{{default "config/fixtures.tfvars" .TF_VARS}}'
+    TF_BACKEND: '{{default "config/remote.config" .TF_BACKEND}}'
 
     AWS_ACCESS_KEY_ID: '{{default "" .AWS_ACCESS_KEY_ID}}'
     AWS_SECRET_ACCESS_KEY: '{{default "" .AWS_SECRET_ACCESS_KEY}}'
@@ -35,20 +35,20 @@ tasks:
         deps: [clean]
         cmds:
             - task: tf:plan
-              vars: {TF_WORKING_DIR: '{{.TF_MODULE}}/{{.TF_EXAMPLE_RECIPE}}', TF_VARS_FILE: config/fixtures.tfvars}
+              vars: {TF_WORKING_DIR: '{{.TF_MODULE}}/{{.TF_EXAMPLE_RECIPE}}', TF_VARS_FILE: '{{.TF_VARS}}'}
 
     apply:
         deps: [clean]
         cmds:
             - task: tf:apply
-              vars: {TF_WORKING_DIR: '{{.TF_MODULE}}/{{.TF_EXAMPLE_RECIPE}}', TF_VARS_FILE: config/fixtures.tfvars}
+              vars: {TF_WORKING_DIR: '{{.TF_MODULE}}/{{.TF_EXAMPLE_RECIPE}}', TF_VARS_FILE: '{{.TF_VARS}}'}
 
 
     destroy:
         deps: [clean]
         cmds:
             - task: tf:destroy
-              vars: {TF_WORKING_DIR: '{{.TF_MODULE}}/{{.TF_EXAMPLE_RECIPE}}', TF_VARS_FILE: config/fixtures.tfvars}
+              vars: {TF_WORKING_DIR: '{{.TF_MODULE}}/{{.TF_EXAMPLE_RECIPE}}', TF_VARS_FILE: '{{.TF_VARS}}'}
 
     ci:
         cmds:
