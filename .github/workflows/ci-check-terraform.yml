@@ -59,6 +59,10 @@ jobs:
                       module: default
                       tf_version: 1.3.6
 
+                    - name: basic
+                      module: iam-group
+                      tf_version: 1.3.6
+
         defaults:
             run:
                 working-directory: examples/${{ matrix.module }}/${{ matrix.name }}

@@ -45,10 +45,21 @@ The documentation is **automatically generated** by [terraform-docs](https://ter
 
 ### Capabilities
 
+| Module           | Status   | Description                                            |
+|------------------|----------|--------------------------------------------------------|
+| `aws-accounts`   | Stable ✅ | Create or many AWS accounts, within AWS Organizations. |
+| `aws-iam-groups` | Stable ✅ | Create AWS IAM groups                                  |
+
+
 #### Module: Default
 
 1. Allows to create one or many AWS accounts.
 2. Allows to set organizational units for these accounts, or attach them directly into the root AWS Org.
+
+#### Module: IAM Groups
+
+1. Allow us to create one or many IAM groups
+2. Handle specific paths, with optional attributes.
 
 ### Getting Started
 
@@ -111,6 +122,7 @@ The module's relevant components, structure and "skeleton" is described below:
 ```
 
 Where:
+
 - **⚡️Modules**: refers to the actual module's directory. Where the `.tf` files reside. Each `subdirectory` is a module.
 - **⚡️Examples**: refers to the examples directory, where the examples recipes lives. These are also used for testing the infrastructure using [Terratest](https://terratest.gruntwork.io/). For its specific documentation, query [this link](examples/README.md)
 - **⚡️Tests**: refers to the tests directory, where the tests recipes lives. These are also used for testing the infrastructure using [Terratest](https://terratest.gruntwork.io/). For its specific documentation, query [this link](tests/README.md)
