@@ -18,3 +18,7 @@ output "tags_set" {
 Custom outputs
 -------------------------------------
 */
+// FIXME: When this module is re-taken, remove it.
+output "is_enabled_locals" {
+  value = local.is_enabled
+}
