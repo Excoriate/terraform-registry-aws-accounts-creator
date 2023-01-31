@@ -1,0 +1,52 @@
+---
+formatter: markdown table
+
+header-from: main.tf
+content: |-
+    # ☁️ AWS IAM Group permissions
+    ## Description
+    {{ .Header }}
+    For more information about this module's capabilities, please refer to: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group
+
+    ---
+    ## Example
+    Examples of this module's usage are available in the [examples](./examples) folder.
+    This module:
+    * ✅ Create an `IAM` policy to generate permissions for a certain IAM group.
+    * ✅ Create an `IAM` policy attachment.
+    >Note: This module assumes that the IAM group already exists.
+
+    ```hcl
+    {{ include "../../examples/iam-group-permissions/basic/main.tf" }}
+    ```
+
+    For module composition, It's recommended to take a look at the module's `outputs` to understand what's available:
+    ```hcl
+    {{ include "outputs.tf" }}
+    ```
+    ---
+
+    ## Module's documentation
+    (This documentation is auto-generated using [terraform-docs](https://terraform-docs.io))
+    {{ .Providers }}
+
+    {{ .Modules }}
+
+    {{ .Resources }}
+
+    {{ .Requirements }}
+
+    {{ .Inputs }}
+
+    {{ .Outputs }}
+
+output:
+    file: README.md
+    mode: inject
+    template: |-
+        <!-- BEGIN_TF_DOCS -->
+        {{ .Content }}
+        <!-- END_TF_DOCS -->
+settings:
+    anchor: true
+    color: true

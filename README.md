@@ -44,10 +44,12 @@ The documentation is **automatically generated** by [terraform-docs](https://ter
 
 ### Capabilities
 
-| Module           | Status   | Description                                            |
-|------------------|----------|--------------------------------------------------------|
-| `aws-accounts`   | Stable ✅ | Create or many AWS accounts, within AWS Organizations. |
-| `aws-iam-groups` | Stable ✅ | Create AWS IAM groups                                  |
+| Module                      | Status   | Description                                            |
+|-----------------------------|----------|--------------------------------------------------------|
+| `aws-accounts`              | Stable ✅ | Create or many AWS accounts, within AWS Organizations. |
+| `aws-iam-groups`            | Stable ✅ | Create AWS IAM groups                                  |
+| `aws-iam-group-permissions` | Stable ✅ | Create IAM Group policies, and required attachments    |
+| `aws-iam-users`             | Stable ✅ | Create AWS IAM (human) users                           |
 
 
 #### Module: Default

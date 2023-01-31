@@ -16,6 +16,21 @@ content: |-
     {{ include "../../examples/iam-user/basic/main.tf" }}
     ```
 
+    Follow these instructions after creation, in order to activate/user a given user created by this module:
+    1. The user will be created normally after a proper `terraform apply` command.
+    2. Once the command finished, it'll `output` the encrypted password. Check the output `keybase_password_decrypt_command`. E.g.:
+    ```Text
+    - keybase_password_decrypt_command      = <<-EOT
+      echo "wcFMAxXN0J1RhIFJAQ/9ED6VZeaFENxGb3En8KsqAv7b6Cni6Nf7fCoJsVt8uXbmLvIhVAuZhPIwfCxyLa6PTCoLZKcatsh6fE9xteAF5LiAbYWW4AV7mdX8V17X1BqaHFk4FBL4f7855IvLj77IKobzzTihCu/uMcmyjNZCYmEEUh7FTGuVxwzKpdO/
+      kkLEDK5RyrLHAfOr+6flPPVBMJH+faaXTuc5EGQORSmEa142QAjOnZfX6lD3WgFAJiTgvQQUoacwmfkY6szO1yEdDDyJNcpCib3+wajGOeUej8+eEB8xwsyRoMlhDzce9X4QER6z4n5Uv5vrt6UXzF19ehlw0V4ndTRWeXTF0cIiW0LJgHl8wk0tY1TMImbJmBm
+      /r+56Rg45IwkwA9jwiAhzdWXlovTE4FQ5wGU2IIGmtvdRgAzr2dEF5Hj5JkkNR4tRfZbKraghHhL6pnnaibP4rw6WbQDz8ZnLcvTzykKGhOC4TEpElJeFpnDAtm1lSnb3AaKLx/UCMaN6c+lJ3Bea2ifvld8fI8i96TQhzAc9RDdjzeLZ+b77hS7jNoFF4cq6A08
+      rj1dV8+N0bkPp+eFEmyYxo+raZtTcb2OVMALpA3v0nA1eCZxBnDSSQFWJ6lnd0meyG9Lue6mhv8lMW1MF81taJuDI23EQ5da7hwk06V9OmnKHecC7pMHkWzulE9Em2+5z/KzDHkPG9NTBlkah4sF2LE=" | base64 --decode | keybase pgp decrypt
+    ```
+    3. Ensure that you have [KeyBase](https://keybase.io/) installed and configured. If not, please follow the [instructions](https://keybase.io/download).
+    4. Copy the command from the output and paste it in your terminal. It'll ask you for your KeyBase passphrase. After that, it'll output the decrypted password.
+    5. Use the decrypted password to login to the AWS console.
+    >Note: The `keybase` user should be an existing user, and must be configured beforehand.
+
     For module composition, It's recommended to take a look at the module's `outputs` to understand what's available:
     ```hcl
     {{ include "outputs.tf" }}

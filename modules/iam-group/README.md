@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# ☁️ AWS IAM Grouops
+# ☁️ AWS IAM Groups
 ## Description
 
 For more information about this module's capabilities, please refer to: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group
@@ -73,7 +73,7 @@ output "groups_created_arns" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.50.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.52.0 |
 
 ## Modules
 

@@ -76,6 +76,12 @@ tasks:
             - task: module:ci
               vars: {TF_MODULE: '{{.MODULE}}'}
 
+    module-docs:
+      desc: Generate the document on a given module.
+      cmds:
+        - task: module:docs
+          vars: {TF_MODULE: '{{.MODULE}}'}
+
     recipe-init:
         desc: Run Terraform Init on module's example recipe source code.
         cmds:
