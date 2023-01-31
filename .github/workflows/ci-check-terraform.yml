@@ -18,20 +18,16 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - name: basic
-                      module: default
+                    - name: default
                       tf_version: 1.3.6
 
-                    - name: basic
-                      module: iam-group
+                    - name: iam-group
                       tf_version: 1.3.6
 
-                    - name: basic
-                      module: iam-group-permissions
+                    - name: iam-group-permissions
                       tf_version: 1.3.6
 
-                    - name: basic
-                      module: iam-user
+                    - name: user
                       tf_version: 1.3.6
 
         runs-on: ubuntu-latest
