@@ -6,6 +6,10 @@ users_config = [
   {
     email  = "alex@ideaup.cl"
     groups = ["admin"]
+  },
+  {
+    email  = "atorres.ruiz@hotmail.com"
+    groups = ["admin"]
   }
 ]
 

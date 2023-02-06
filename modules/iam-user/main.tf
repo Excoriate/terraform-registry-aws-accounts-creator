@@ -11,7 +11,7 @@ resource "aws_iam_user" "this" {
 resource "aws_iam_user_login_profile" "this" {
   for_each = local.users_login_profile_to_create
 
-  user                    = join("", [for user in aws_iam_user.this : user.name if user != null])
+  user                    = aws_iam_user.this[each.key].name
   pgp_key                 = each.value["pgp_key"]
   password_length         = each.value["password_length"]
   password_reset_required = each.value["password_reset_required"]
@@ -25,7 +25,7 @@ resource "aws_iam_user_login_profile" "this" {
 
 resource "aws_iam_user_group_membership" "this" {
   for_each   = local.users_groups_to_create
-  user       = join("", [for user in aws_iam_user.this : user.name if user != null])
+  user       = aws_iam_user.this[each.key].name
   groups     = each.value["groups"]
   depends_on = [aws_iam_user.this]
 }
