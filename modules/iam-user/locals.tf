@@ -76,8 +76,18 @@ locals {
     * -------------------------------------------------------
   */
 
-  encrypted_password               = join("", [for login in aws_iam_user_login_profile.this : login.encrypted_password])
   pgp_key_is_keybase               = length(regexall("keybase:", var.pgp_key)) > 0 ? true : false
-  keybase_password_pgp_message     = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_pgp_message.txt", { encrypted_password = local.encrypted_password }) : ""
-  keybase_password_decrypt_command = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_decrypt_command.sh", { encrypted_password = local.encrypted_password }) : ""
+  passwords = [
+    for user in aws_iam_user_login_profile.this : {
+      encrypted_password = user.encrypted_password
+      pgp_key_is_keybase = length(regexall("keybase:", var.pgp_key)) > 0 ? true : false
+      keybase_password_pgp_message = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_pgp_message.txt", { encrypted_password = user.encrypted_password }) : ""
+      keybase_password_decrypt_command = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_decrypt_command.sh", { encrypted_password = user.encrypted_password }) : ""
+    }
+  ]
+
+#  encrypted_password               = join("", [for login in aws_iam_user_login_profile.this : login.encrypted_password])
+#  pgp_key_is_keybase               = length(regexall("keybase:", var.pgp_key)) > 0 ? true : false
+#  keybase_password_pgp_message     = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_pgp_message.txt", { encrypted_password = local.encrypted_password }) : ""
+#  keybase_password_decrypt_command = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_decrypt_command.sh", { encrypted_password = local.encrypted_password }) : ""
 }
