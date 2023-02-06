@@ -19,32 +19,32 @@ Custom outputs
 -------------------------------------
 */
 output "user_name" {
-  value       = join("", [for user in aws_iam_user.this : user.name])
+  value       = [for user in aws_iam_user.this : user.name]
   description = "The user name of the user."
 }
 
 output "user_arn" {
-  value       = join("", [for user in aws_iam_user.this : user.arn])
+  value       = [for user in aws_iam_user.this : user.arn]
   description = "The ARN of the user."
 }
 
 output "user_unique_id" {
-  value       = join("", [for user in aws_iam_user.this : user.unique_id])
+  value       = [for user in aws_iam_user.this : user.unique_id]
   description = "The unique ID assigned by AWS."
 }
 
 output "user_path" {
-  value       = join("", [for user in aws_iam_user.this : user.path])
+  value       = [for user in aws_iam_user.this : user.path]
   description = "The path to the user."
 }
 
 output "user_login_profile_encrypted_password" {
-  value       = join("", [for user in aws_iam_user_login_profile.this : user.encrypted_password])
+  value       = [for user in aws_iam_user_login_profile.this : user.encrypted_password]
   description = "The encrypted password for the user."
 }
 
 output "user_login_profile_key_fingerprint" {
-  value       = join("", [for user in aws_iam_user_login_profile.this : user.key_fingerprint])
+  value       = [for user in aws_iam_user_login_profile.this : user.key_fingerprint]
   description = "The MD5 message digest of the key used to encrypt the password."
 }
 
