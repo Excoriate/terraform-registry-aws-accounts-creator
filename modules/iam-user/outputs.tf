@@ -53,7 +53,7 @@ output "pgp_key" {
   description = "The PGP key to use to encrypt the password."
 }
 
-output "passwords"{
+output "passwords" {
   value       = local.passwords
   description = "The passwords for the user."
 }
