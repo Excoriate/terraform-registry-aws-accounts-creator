@@ -6,7 +6,7 @@ iam_policy_config = [
     name = "test-policy"
     statements = [
       {
-        sid    = "test-statement"
+        sid    = "teststatement1"
         effect = "Allow"
         actions = [
           "s3:ListAllMyBuckets",

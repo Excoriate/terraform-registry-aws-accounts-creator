@@ -34,6 +34,14 @@ jobs:
                       module: iam-user
                       tf_version: 1.3.6
 
+                    - name: basic
+                      module: iam-role
+                      tf_version: 1.3.6
+
+                    - name: basic
+                      module: iam-policy
+                      tf_version: 1.3.6
+
         defaults:
             run:
                 working-directory: examples/${{ matrix.module }}/${{ matrix.name }}
@@ -85,6 +93,15 @@ jobs:
                     - name: basic
                       module: iam-user
                       tf_version: 1.3.6
+
+                    - name: basic
+                      module: iam-role
+                      tf_version: 1.3.6
+
+                    - name: basic
+                      module: iam-policy
+                      tf_version: 1.3.6
+
         defaults:
             run:
                 working-directory: examples/${{ matrix.module }}/${{ matrix.name }}

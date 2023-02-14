@@ -13,6 +13,7 @@ locals {
       name               = lower(trimspace(p["name"]))
       policy_document_id = p["policy_document_id"] == null ? null : lower(trimspace(p["policy_document_id"]))
       description        = lower(trimspace(p["description"]))
+      path               = p["path"] == null ? null : lower(trimspace(p["path"]))
       // Statement block
       statements = p["statements"] != null ? [
         for s in p["statements"] : {
@@ -21,13 +22,13 @@ locals {
           actions = s["actions"] != null ? [
             for a in s["actions"] : lower(trimspace(a))
           ] : []
-          no_actions = s["no_actions"] != null ? [
+          not_actions = s["not_actions"] != null ? [
             for a in s["no_actions"] : lower(trimspace(a))
           ] : []
           resources = s["resources"] != null ? [
             for r in s["resources"] : lower(trimspace(r))
           ] : []
-          no_resources = s["no_resources"] != null ? [
+          not_resources = s["not_resources"] != null ? [
             for r in s["no_resources"] : lower(trimspace(r))
           ] : []
           principals : s["principals"] != null ? [
@@ -63,9 +64,10 @@ locals {
   ]
 
   iam_policy_config_to_create = !local.is_iam_policy_enabled ? {} : {
-    for p in local.iam_policy_config_normalised : p["nam"] => {
+    for p in local.iam_policy_config_normalised : p["name"] => {
       name                      = p["name"]
       policy_document_id        = p["policy_document_id"]
+      path                      = p["path"]
       description               = p["description"]
       statements                = p["statements"]
       source_policy_documents   = p["source_policy_documents"]

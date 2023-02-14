@@ -3,7 +3,7 @@ resource "aws_iam_policy" "this" {
   name        = each.value["name"]
   path        = each.value["path"]
   description = each.value["description"]
-  policy      = join("", [for policy in data.aws_iam_policy_document.this[each.key].json : policy])
+  policy      = join("", [for policy in data.aws_iam_policy_document.this : policy.json])
 }
 
 data "aws_iam_policy_document" "this" {
@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "this" {
     iterator = statement
 
     content {
-      sid           = lookup(statement.value, "sid", null)
+      sid           = lookup(statement.value, "sid", replace(each.key, "/[^0-9A-Za-z]/", ""))
       actions       = lookup(statement.value, "actions", null)
       not_actions   = lookup(statement.value, "not_actions", null)
       resources     = lookup(statement.value, "resources", null)

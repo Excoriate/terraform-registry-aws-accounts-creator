@@ -12,6 +12,7 @@ variable "iam_policy_config" {
   type = list(object({
     name               = string
     policy_document_id = optional(string, null)
+    path               = optional(string, "/")
     description        = optional(string, "No description given to this IAM policy")
     statements = optional(list(object({
       sid           = string // Required.
@@ -31,7 +32,7 @@ variable "iam_policy_config" {
         identifiers = list(string)
       })), null)
       // Optional block during the formation of the IAM policy.
-      condition = optional(list(object({
+      conditions = optional(list(object({
         test     = string
         variable = string
         values   = list(string)
@@ -44,6 +45,7 @@ variable "iam_policy_config" {
   A list of objects that contains the configuration of the IAM policies to be created.
   Each object in the list represents a single IAM policy. The current supported options are:
   - name: The name of the IAM policy.
+  - path: The path of the IAM policy.
   - policy_document_id: The ID of the IAM policy document to be used. If this is not provided, the module will create a new IAM policy document.
   - description: The description of the IAM policy.
 If this is not provided, the module will create a new IAM policy document.

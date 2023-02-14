@@ -24,7 +24,6 @@ content: |-
     ```hcl
     {{ include "../../examples/iam-policy/basic/config/fixtures.tfvars" }}
     ```
-
     For module composition, It's recommended to take a look at the module's `outputs` to understand what's available:
     ```hcl
     {{ include "outputs.tf" }}
