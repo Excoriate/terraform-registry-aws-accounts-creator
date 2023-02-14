@@ -10,8 +10,8 @@ data "aws_iam_policy_document" "this" {
   for_each = local.iam_policy_config_to_create
 
   policy_id                 = each.value["policy_document_id"]
-  override_policy_documents = each.value["override_policy_documents"] != [] ? each.value["override_policy_documents"] : null
-  source_policy_documents   = each.value["source_policy_documents"] != [] ? each.value["source_policy_documents"] : null
+  override_policy_documents = length(each.value["override_policy_documents"]) > 0 ? each.value["override_policy_documents"] : null
+  source_policy_documents   = length(each.value["source_policy_documents"]) > 0 ? each.value["source_policy_documents"] : null
 
   dynamic "statement" {
     for_each = each.value["statements"]
