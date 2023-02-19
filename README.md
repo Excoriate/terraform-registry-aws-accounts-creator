@@ -44,14 +44,15 @@ The documentation is **automatically generated** by [terraform-docs](https://ter
 
 ### Capabilities
 
-| Module                      | Status   | Description                                                                                                    |
-|-----------------------------|----------|----------------------------------------------------------------------------------------------------------------|
-| `aws-accounts`              | Stable ✅ | Create or many AWS accounts, within AWS Organizations.                                                         |
-| `aws-iam-groups`            | Stable ✅ | Create AWS IAM groups                                                                                          |
-| `aws-iam-group-permissions` | Stable ✅ | Create IAM Group policies, and required attachments                                                            |
-| `aws-iam-users`             | Stable ✅ | Create AWS IAM (human) users                                                                                   |
-| `aws-iam-role`              | Stable ✅ | Create an IAM role, with complex options like attached IAM policies, and others                                |
-| `aws-iam-policy`            | Stable ✅ | Create an IAM policy, with complex options and allow to export its json document, or the object if applicable. |
+| Module                      | Status   | Description                                                                                                                             |
+|-----------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| `aws-accounts`              | Stable ✅ | Create or many AWS accounts, within AWS Organizations.                                                                                  |
+| `aws-iam-groups`            | Stable ✅ | Create AWS IAM groups                                                                                                                   |
+| `aws-iam-group-permissions` | Stable ✅ | Create IAM Group policies, and required attachments                                                                                     |
+| `aws-iam-users`             | Stable ✅ | Create AWS IAM (human) users                                                                                                            |
+| `aws-iam-role`              | Stable ✅ | Create an IAM role, with complex options like attached IAM policies, and others                                                         |
+| `aws-iam-policy`            | Stable ✅ | Create an IAM policy, with complex options and allow to export its json document, or the object if applicable.                          |
+| `aws-iam-policy-attacher`   | Stable ✅ | Module that wraps the attachment functionality. It's intended to be used in order to attach multiple IAM policies to several IAM roles. |
 
 
 #### Module: Default
