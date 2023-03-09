@@ -18,7 +18,7 @@ locals {
       statements = p["statements"] != null ? [
         for s in p["statements"] : {
           sid    = s["sid"] == null ? null : lower(trimspace(s["sid"]))
-          effect = lower(trimspace(s["effect"]))
+          effect = trimspace(s["effect"])
           actions = s["actions"] != null ? [
             for a in s["actions"] : lower(trimspace(a))
           ] : []

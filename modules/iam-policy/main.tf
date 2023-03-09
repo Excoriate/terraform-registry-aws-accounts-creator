@@ -23,6 +23,7 @@ data "aws_iam_policy_document" "this" {
       not_actions   = lookup(statement.value, "not_actions", null)
       resources     = lookup(statement.value, "resources", null)
       not_resources = lookup(statement.value, "not_resources", null)
+      effect        = lookup(statement.value, "effect", "Allow")
 
       dynamic "principals" {
         for_each = lookup(statement.value, "principals", [])
