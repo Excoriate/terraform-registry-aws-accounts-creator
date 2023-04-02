@@ -1,0 +1,60 @@
+---
+formatter: markdown table
+
+header-from: main.tf
+content: |-
+    # ☁️ AWS IAM Rol
+    ## Description
+    {{ .Header }}
+    This module creates an IAM Role, with a given set of policies attached to it. For more information about IAM Roles, please refer to the [official documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
+    The following capabilities are supported:
+    - Create a role with a given set of policies.
+    - Create an assume role policy document, with a given set of principals.
+    - Supports the creation of a default IAM policy, if passed. If not, it'll create an stand-alone IAM role without a policy.
+    - Supports thea attachment of N IAM policies (documents, in .json) passed as a list to the role.
+
+    ---
+    ## Example
+    Examples of this module's usage are available in the [examples](./examples) folder.
+
+    ```hcl
+    {{ include "../../examples/iam-role/basic/main.tf" }}
+    ```
+
+    An example of passing a more complex set of functions to this role.
+    ```hcl
+    {{ include "../../examples/iam-role/basic/config/fixtures.tfvars" }}
+    ```
+    ```hcl
+    {{ include "../../examples/iam-role/basic/config/fixtures-with-actions.tfvars" }}
+    ```
+    For module composition, It's recommended to take a look at the module's `outputs` to understand what's available:
+    ```hcl
+    {{ include "outputs.tf" }}
+    ```
+    ---
+
+    ## Module's documentation
+    (This documentation is auto-generated using [terraform-docs](https://terraform-docs.io))
+    {{ .Providers }}
+
+    {{ .Modules }}
+
+    {{ .Resources }}
+
+    {{ .Requirements }}
+
+    {{ .Inputs }}
+
+    {{ .Outputs }}
+
+output:
+    file: README.md
+    mode: inject
+    template: |-
+        <!-- BEGIN_TF_DOCS -->
+        {{ .Content }}
+        <!-- END_TF_DOCS -->
+settings:
+    anchor: true
+    color: true

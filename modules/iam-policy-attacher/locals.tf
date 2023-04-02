@@ -3,7 +3,7 @@ locals {
 
   /*
     * -------------------------------------------------------
-    * IAM Policy feature flags, and other options.
+    * Feature flags
     * -------------------------------------------------------
   */
   is_enabled = !var.is_enabled ? false : var.config != null
