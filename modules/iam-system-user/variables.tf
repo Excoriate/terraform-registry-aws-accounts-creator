@@ -63,12 +63,16 @@ variable "iam_user_credentials_config" {
   type = list(object({
     name    = string
     enabled = optional(bool, true)
+    pgp_key = optional(string, null)
+    status  = optional(string, "Active")
   }))
   description = <<EOF
 This configuration works along with the iam_user_config to create the IAM user, that's intended for system/programmatic access. It enables
 the user to have access keys to perform certain actions, by creating access keys for the user. The following attributes are supported:
 - name: The name of the user to create. It can't be ommited. It's used to identify the user to which the access keys will be created.
 - enabled: Whether to create access keys for the user. If set to false, the access keys will not be created.
+- pgp_key: The PGP key to encrypt the access keys. If it's not set, the access keys will not be encrypted.
+- status: The status of the access keys. Can be either Active or Inactive.
 EOF
   default     = null
 }

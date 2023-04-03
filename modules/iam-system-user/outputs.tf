@@ -42,3 +42,45 @@ output "iam_user_permissions_boundary" {
   value       = [for user in aws_iam_user.this : user.permissions_boundary]
   description = "The ARN of the policy that is used to set the permissions boundary for the user."
 }
+
+output "iam_user_policy_inline_id" {
+  value       = [for p in aws_iam_user_policy.inline : p.id]
+  description = "The list of inline policy IDs."
+}
+
+output "iam_user_policy_inline_name" {
+  value       = [for p in aws_iam_user_policy.inline : p.name]
+  description = "The list of inline policy names."
+}
+
+output "iam_user_policy_inline_policy" {
+  value       = [for p in aws_iam_user_policy.inline : p.policy]
+  description = "The list of inline policy documents."
+}
+
+output "iam_user_policy_attached_id" {
+  value       = [for p in aws_iam_user_policy_attachment.attached_policy : p.id]
+  description = "The list of attached policy IDs."
+}
+
+output "iam_user_policy_attached_policy_arn" {
+  value       = [for p in aws_iam_user_policy_attachment.attached_policy : p.policy_arn]
+  description = "The list of attached policy ARNs."
+}
+
+output "iam_user_key_id" {
+  value       = [for k in aws_iam_access_key.this : k.id]
+  description = "The list of access key IDs."
+  sensitive   = true
+}
+
+output "iam_user_key_status" {
+  value       = [for k in aws_iam_access_key.this : k.status]
+  description = "The list of access key statuses."
+}
+
+output "iam_user_key_secret" {
+  value       = [for k in aws_iam_access_key.this : k.secret]
+  description = "The list of access key secrets."
+  sensitive   = true
+}

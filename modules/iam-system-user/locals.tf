@@ -3,6 +3,7 @@ locals {
 
   is_iam_user_enabled        = !var.is_enabled ? false : var.iam_user_config == null ? false : length(var.iam_user_config) > 0
   is_iam_permissions_enabled = !local.is_iam_user_enabled ? false : var.iam_user_permissions_config == null ? false : length(var.iam_user_permissions_config) > 0
+  is_iam_user_creds_enabled  = !local.is_iam_user_enabled ? false : var.iam_user_credentials_config == null ? false : length(var.iam_user_credentials_config) > 0
 
   /*
     * -------------------------------------------------------
@@ -39,5 +40,23 @@ locals {
 
   iam_user_permissions_cfg_map = !local.is_iam_permissions_enabled ? {} : {
     for p in local.iam_user_permissions_cfg_normalised : p["name"] => p
+  }
+
+  /*
+    * -------------------------------------------------------
+    * IAM credentials configuration
+    * -------------------------------------------------------
+  */
+  iam_user_creds_cfg_normalised = !local.is_iam_user_creds_enabled ? [] : [
+    for c in var.iam_user_credentials_config : {
+      name    = trimspace(c["name"])
+      enabled = c["enabled"] == null ? true : c["enabled"]
+      pgp_key = c["pgp_key"] == null ? null : trimspace(c["pgp_key"])
+      status  = c["status"] == null ? "Active" : trimspace(c["status"])
+    }
+  ]
+
+  iam_user_creds_cfg_map = !local.is_iam_user_creds_enabled ? {} : {
+    for c in local.iam_user_creds_cfg_normalised : c["name"] => c
   }
 }
