@@ -8,14 +8,21 @@ import (
   "testing"
 )
 
-func TestBasicSystemUserConfigurations(t *testing.T) {
+func TestSystemUserInlinePolicy(t *testing.T) {
   // Given
   iamUser := tf.GetRandomUserName()
+
   scenarioVars := map[string]interface{}{
-    "is_enabled": false,
+    "is_enabled": true,
     "iam_user_config": []map[string]interface{}{
       {
         "name": iamUser,
+      },
+    },
+    "iam_user_permissions_config": []map[string]interface{}{
+      {
+        "name":               iamUser,
+        "inline_policy_json": scenario.GenerateIAMPolicyJSON(t),
       },
     },
   }
@@ -24,24 +31,30 @@ func TestBasicSystemUserConfigurations(t *testing.T) {
 
   terraformOptions := tf.GetTerraformOptions(inputVars, recipe, t)
   terraform.Init(t, terraformOptions)
+  out, err := terraform.PlanE(t, terraformOptions)
   defer terraform.Destroy(t, terraformOptions)
 
-  // Then
-  t.Run("A plan with an IAM user with just its name", func(t *testing.T) {
-    out, err := terraform.PlanE(t, terraformOptions)
+  t.Run("An IAM user an Inline IAM policy is planned", func(t *testing.T) {
     assert.NoError(t, err)
-    assert.Contains(t, out, "You can apply this plan to save these new output values to the Terraform")
+    assert.Contains(t, out, "1 to add, 0 to change, 0 to destroy")
   })
 }
 
-func TestBasicSystemUserCreation(t *testing.T) {
+func TestSystemUserInlinePolicyCreation(t *testing.T) {
   // Given
   iamUser := tf.GetRandomUserName()
+
   scenarioVars := map[string]interface{}{
     "is_enabled": true,
     "iam_user_config": []map[string]interface{}{
       {
         "name": iamUser,
+      },
+    },
+    "iam_user_permissions_config": []map[string]interface{}{
+      {
+        "name": iamUser,
+        //"inline_policy_json": scenario.GenerateIAMPolicyJSON(t),
       },
     },
   }
@@ -53,7 +66,7 @@ func TestBasicSystemUserCreation(t *testing.T) {
   out, err := terraform.ApplyE(t, terraformOptions)
   defer terraform.Destroy(t, terraformOptions)
 
-  t.Run("An IAM user with just its name is created", func(t *testing.T) {
+  t.Run("An IAM user with an inline IAM policy is created", func(t *testing.T) {
     assert.NoError(t, err)
     assert.Contains(t, out, "Apply complete! Resources: 1 added, 0 changed, 0 destroyed.")
   })
@@ -62,7 +75,6 @@ func TestBasicSystemUserCreation(t *testing.T) {
     scenario.OutputsAreNotEmpty(t, terraformOptions, scenario.NoEmptyValidationOpt{
       ToValidate: outputs,
       ToTolerate: []string{
-        "iam_user_permissions_boundary",
         "iam_user_policy_inline_id",
         "iam_user_policy_inline_name",
         "iam_user_policy_inline_policy",

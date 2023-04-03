@@ -7,8 +7,26 @@ import (
   "testing"
 )
 
-func OutputsAreNotEmpty(t *testing.T, tfOpt *terraform.Options, outputs []string) {
-  for _, output := range outputs {
+type NoEmptyValidationOpt struct {
+  ToValidate []string
+  ToTolerate []string
+}
+
+func OutputsAreNotEmpty(t *testing.T, tfOpt *terraform.Options, validationOpt NoEmptyValidationOpt) {
+  stringInSlice := func(str string, slice []string) bool {
+    for _, s := range slice {
+      if s == str {
+        return true
+      }
+    }
+    return false
+  }
+
+  for _, output := range validationOpt.ToValidate {
+    if stringInSlice(output, validationOpt.ToTolerate) {
+      continue
+    }
+
     assert.NotEmpty(t, output, "Output %s is empty", output)
     tfOut := terraform.OutputList(t, tfOpt, output)
     assert.NotEmpty(t, tfOut, "Terraform output %s is empty", output)
@@ -32,4 +50,9 @@ func UserInAWSIsSuccessfullyCreated(t *testing.T, userName, userPath string) {
   }
 
   assert.NotEmpty(t, userPath, "IAM user %s path is empty", userName)
+}
+
+func UserHasAnInlineIAMPolicy(t *testing.T, userName string) {
+  inlinePolicies := aws.GetInlinePolicyForIAMUser(t, userName)
+  assert.NotEmpty(t, inlinePolicies, "IAM user %s has no inline policies", userName)
 }
