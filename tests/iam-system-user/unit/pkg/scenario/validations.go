@@ -52,7 +52,13 @@ func UserInAWSIsSuccessfullyCreated(t *testing.T, userName, userPath string) {
   assert.NotEmpty(t, userPath, "IAM user %s path is empty", userName)
 }
 
-func UserHasAnInlineIAMPolicy(t *testing.T, userName string) {
-  inlinePolicies := aws.GetInlinePolicyForIAMUser(t, userName)
-  assert.NotEmpty(t, inlinePolicies, "IAM user %s has no inline policies", userName)
+func UserInAWSHasValidKeys(t *testing.T, userName string) {
+  iamUserKeys := aws.GetIAMUserKeys(t, userName)
+  assert.NotEmpty(t, iamUserKeys.AccessKeyMetadata, "IAM user %s has no access keys", userName)
+
+  for _, key := range iamUserKeys.AccessKeyMetadata {
+    assert.NotEmpty(t, key.AccessKeyId, "IAM user %s has no access key ID", userName)
+    assert.NotEmpty(t, key.Status, "IAM user %s has no access key status", userName)
+    assert.NotNil(t, key.Status, "IAM user %s has inactive access key", userName)
+  }
 }

@@ -25,29 +25,18 @@ func GetIAMUser(t *testing.T, userName string) *iam.GetUserOutput {
   return iamUser
 }
 
-func GetInlinePolicyForIAMUser(t *testing.T, userName string) *iam.GetPolicyOutput {
+func GetIAMUserKeys(t *testing.T, userName string) *iam.ListAccessKeysOutput {
   awsAuth, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-east-1"))
   assert.NoError(t, err)
   assert.NotNil(t, awsAuth)
 
   iamClient := iam.NewFromConfig(awsAuth)
-  listUserPoliciesOutput, err := iamClient.ListUserPolicies(context.TODO(), &iam.ListUserPoliciesInput{
+  accessKeysOutput, err := iamClient.ListAccessKeys(context.TODO(), &iam.ListAccessKeysInput{
     UserName: aws.String(userName),
   })
 
   assert.NoError(t, err)
-  assert.NotNil(t, listUserPoliciesOutput)
-  assert.NotEmpty(t, listUserPoliciesOutput.PolicyNames)
+  assert.NotNil(t, accessKeysOutput)
 
-  // Assuming there's only one inline policy
-  policyName := listUserPoliciesOutput.PolicyNames[0]
-
-  getPolicyOutput, err := iamClient.GetPolicy(context.TODO(), &iam.GetPolicyInput{
-    PolicyArn: aws.String(policyName),
-  })
-
-  assert.NoError(t, err)
-  assert.NotNil(t, getPolicyOutput)
-
-  return getPolicyOutput
+  return accessKeysOutput
 }
