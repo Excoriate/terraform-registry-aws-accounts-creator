@@ -3,31 +3,54 @@ formatter: markdown table
 
 header-from: main.tf
 content: |-
-    # ☁️ AWS IAM Rol
+    # ☁️ AWS System user
     ## Description
     {{ .Header }}
-    This module creates an IAM Role, with a given set of policies attached to it. For more information about IAM Roles, please refer to the [official documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
-    The following capabilities are supported:
-    - Create a role with a given set of policies.
-    - Create an assume role policy document, with a given set of principals.
-    - Supports the creation of a default IAM policy, if passed. If not, it'll create an stand-alone IAM role without a policy.
-    - Supports thea attachment of N IAM policies (documents, in .json) passed as a list to the role.
+    This module generates a system user. What's a system user? - It's an user that's used by a system, not a human. It's a user that's used by a service, or a system, to perform actions on AWS. It's not a user that's used by a human to log in to the AWS console.
+    Examples of system users:
+    - A CI/CD system that needs to deploy code to AWS.
+    - A service that needs to perform actions on AWS.
+    - A system that needs to perform actions on AWS.
+    - A human that needs to perform actions on AWS, but doesn't want to use their own credentials.
+    - A human that needs to perform actions on AWS, but doesn't want to use their own credentials, and doesn't want to use a shared account.
+
+    This module takes care of creating the user, attaching the policies, and generating the access keys. It doesn't store the credentials anywhere, it's up to you to store them in a secure place.
+    Nevertheless, it can be easily composed with other modules to store the credentials in a secure place, like AWS Secrets Manager, or AWS SSM Parameter Store.
 
     ---
     ## Example
     Examples of this module's usage are available in the [examples](./examples) folder.
 
     ```hcl
-    {{ include "../../examples/iam-role/basic/main.tf" }}
+    {{ include "../../examples/iam-system-user/basic/main.tf" }}
     ```
 
-    An example of passing a more complex set of functions to this role.
+    Creating a basic system user:
     ```hcl
-    {{ include "../../examples/iam-role/basic/config/fixtures.tfvars" }}
+    {{ include "../../examples/iam-system-user/basic/config/fixtures.tfvars" }}
+
     ```
+    Creating a system user that has AWS keys:
     ```hcl
-    {{ include "../../examples/iam-role/basic/config/fixtures-with-actions.tfvars" }}
+    {{ include "../../examples/iam-system-user/basic/config/fixtures-keys.tfvars" }}
+
     ```
+    Creating multiple users with AWS credentials included:
+    ```hcl
+    {{ include "../../examples/iam-system-user/basic/config/fixtures-keys-multiple.tfvars" }}
+
+    ```
+    Creating a system user with a custom inline policy:
+    ```hcl
+    {{ include "../../examples/iam-system-user/basic/config/fixtures-policies-inline.tfvars" }}
+
+    ```
+    Creating several users with policies:
+    ```hcl
+    {{ include "../../examples/iam-system-user/basic/config/fixtures-policies-inline-advanced.tfvars" }}
+
+    ```
+
     For module composition, It's recommended to take a look at the module's `outputs` to understand what's available:
     ```hcl
     {{ include "outputs.tf" }}
